@@ -1,11 +1,9 @@
 <x-admin.layout title="Blank">
-    @slot('styles')
+    <x-slot name="styles">
         <style>
-            .Color-ijo{
-                color:red
-            }
+          
         </style>
-    @endslot
+    </x-slot>
 
     <div class="row match-height">
         <div class="col-12">
@@ -20,19 +18,10 @@
         </div>
     </div>
 
-    @slot('scripts')
+    <x-slot name="scripts">
         <script>
-            const ClickMe = () => alert("Oyi");
+            const ClickMe = () => alert("Oyi Sing kedua")
         </script>
-    @endslot
-   
-    {{-- Ini cara yang ke 2  --}}
-    
-   {{-- 
-        <x-slot name="scripts">
-            <script>
-                const ClickMe = () => alert("Oyi Sing kedua")
-            </script>
-        </x-slot> 
-    --}}
+    </x-slot>
+
 </x-admin.layout>
