@@ -21,3 +21,19 @@ Route::get('/', function () {
 Route::get('/admin/blank', function () {
     return view('admin/admin');
 });
+
+Route::get('/index', function () {
+    return view('user.index');
+})->name('users.index');
+
+Route::get('/aboutus', function () {
+    return view('user.aboutus');
+})->name('users.aboutus');
+
+Route::get('/articles', function () {
+    return view('user.blog');
+})->name('users.blogs');
+
+Route::get('/single-articles', function () {
+    return view('user.single_blog');
+})->name('users.singleblogs');
