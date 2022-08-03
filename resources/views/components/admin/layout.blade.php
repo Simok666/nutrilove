@@ -18,9 +18,16 @@
 
 <body>
     <div id="app">
-        <x-admin.navbar />
+        <x-admin.navbar>
+
+        </x-admin.navbar>
+
         <div id="main">
-            <x-admin.header />
+            
+            <x-admin.header>
+
+            </x-admin.header>
+
             <div class="main-content container-fluid">
                 @isset($title)
                     <div class="page-title">
@@ -35,7 +42,10 @@
                 {{ $slot }}
                 
             </div>
-            <x-admin.footer />
+
+            <x-admin.footer>
+
+            </x-admin.footer>
         </div>
     </div>
     <script src="{{ asset('admin_assets/dist/assets/js/feather-icons/feather.min.js') }}"></script>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\admin;
 
 use Illuminate\View\Component;
 
@@ -23,6 +23,48 @@ class navbar extends Component
      */
     public function render()
     {
-        return view('components.admin.navbar');
+        $menus = [
+            "Dashboard" => [
+                "url"   => "/admin",
+                "icon"   => "home"
+            ],
+            "Admin"     => [
+                "url"   => "/admin/admin",
+                "icon"  => "users"
+            ],
+            "User"      => [
+                "url"   => "/admin/user",
+                "icon"  => "user"
+            ],
+            "Article"   => [
+                "url"   => "/admin/article",
+                "icon"  => "file"
+            ],
+            "Gizi"      => [
+                "url"   => "#",
+                "icon"  => "droplet",
+                "childs"=> [
+                    "Riwayat Gizi"      => [
+                        "url"   => "/admin/gizi",
+                    ],
+                    "Setting"      => [
+                        "url"   => "/admin/setting/gizi",
+                    ],
+                ]
+            ],
+            "Setting"   => [
+                "url"   => "#",
+                "icon"  => "settings",
+                "childs"=> [
+                    "General" => [
+                        "url"   => "/admin/setting/general"
+                    ],
+                    "Landing Page" => [
+                        "url"   => "/admin/setting/landingpage"
+                    ]
+                ]
+            ],
+        ];
+        return view('components.admin.navbar', ["menu" => $menus] );
     }
 }
