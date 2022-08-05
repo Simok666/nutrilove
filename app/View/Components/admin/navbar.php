@@ -36,8 +36,8 @@ class navbar extends Component
                 "url"   => "/admin/user",
                 "icon"  => "user"
             ],
-            "Article"   => [
-                "url"   => "/admin/article",
+            "Content"   => [
+                "url"   => "/admin/content",
                 "icon"  => "file"
             ],
             "Gizi"      => [

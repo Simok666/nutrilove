@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,9 @@ Route::get('/', function () {
 Route::get('/admin/blank', function () {
     return view('admin/admin');
 });
+
+Route::get('/admin/content',[AdminController::class,'showContent'])->name('content');
+Route::post('/showtable/{table}',[AdminController::class,'showtables'])->name('tables') ;
 
 Route::get('/index', function () {
     return view('user.index');
