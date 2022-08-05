@@ -12,7 +12,8 @@
         href="{{ asset('admin_assets/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/css/app.css') }}">
     <link rel="shortcut icon" href="{{ asset('admin_assets/dist/assets/images/favicon.svg') }}" type="image/x-icon">
-
+    <link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/style.css') }}">
+    
     {{ $styles ?? '' }}
 </head>
 
@@ -49,11 +50,17 @@
         </div>
     </div>
     <script src="{{ asset('admin_assets/dist/assets/js/feather-icons/feather.min.js') }}"></script>
+    <script src="{{ asset('dashboard.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ asset('admin_assets/dist/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('admin_assets/dist/assets/js/app.js') }}"></script>
     <script src="{{ asset('admin_assets/dist/assets/js/main.js') }}"></script>
+    {{-- <script src="{{ asset('admin_assets/dist/assets/js/vendors.js') }}"></script> --}}
+    <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
 
+    
     {{ $scripts ?? '' }}
+    
 </body>
 
 </html>
