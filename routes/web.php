@@ -25,6 +25,8 @@ Route::get('/admin/blank', function () {
 
 Route::get('/admin/content',[AdminController::class,'showContent'])->name('content');
 Route::post('/showtable/{table}',[AdminController::class,'showtables'])->name('tables') ;
+Route::post('/save/{table}',[AdminController::class,'save']);
+Route::get('/contents/list', [AdminController::class, 'getContent'])->name('contents.list');
 
 Route::get('/index', function () {
     return view('user.index');
