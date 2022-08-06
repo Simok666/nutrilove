@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/style.css') }}">
-<form id="form" class="form-horizontal">
-    @csrf
+<form id="form" class="form-horizontal" enctype="multipart/form-data">
+    @csrf 
     <div class="form-group row">
         <label for="inputEmail3" class="col-sm-3 col-form-label">Kode</label>
         <div class="col-sm-9">
@@ -20,7 +20,7 @@
     <div class="form-group row">
         <label for="inputEmail3" class="col-sm-3 col-form-label">Keterangan</label>
         <div class="col-sm-9">
-            <textarea class="form-control validasi" id="keterangan" placeholder="Keterangan" name="keterangan"></textarea>
+            <textarea class="form-control" id="desc_content" placeholder="Keterangan" name="desc_content"></textarea>
             <script>    
                 var options = {
                     filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
@@ -28,7 +28,7 @@
                     filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
                     filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
                 };
-                CKEDITOR.replace( 'keterangan', options );
+                CKEDITOR.replace( 'desc_content', options );
             </script>
         </div>
     </div>
@@ -36,7 +36,8 @@
     <div class="form-group row">
         <label for="inputEmail3" class="col-sm-3 col-form-label">File</label>
         <div class="col-sm-9">
-            <input type="File" class="form-control validasi" id="file" name="file">
+            <input type="text" class="base64" name="file" id="dwadwa">
+            <input type="File" class="form-control validasi fileInput" id="file" name="file">
         </div>
 
     </div>
@@ -75,6 +76,7 @@ table = new simpleDatatables.DataTable("#table1", {
     "order": [[ 0, "desc" ]],
     "scrollY":"130px",
     "scrollx":true,
+    "ajax": "{{ route('contents.list') }}",
     "responsive": true,
     "searching": false,
     "info":false,
@@ -82,7 +84,7 @@ table = new simpleDatatables.DataTable("#table1", {
         { "data": "kode" },
         { "data": "title" },
         { "data": "file" },
-        { "data": "keterangan" }
+        { "data": "desc_content" }
     ]
 });
 
@@ -92,10 +94,28 @@ setTimeout(function () {
 }, 500);
 
 $('#table1 tbody').on('click', 'tr', function () {
-  var table = $('#table1').DataTable();
+  var table = new simpleDatatables.DataTable(table1);
   var data = table.row( this ).data();
   for (const [key, value] of Object.entries(data)) {
     $("#"+key).val(value);
   }
-} );
+} )
+
+function readFile() {
+  
+  if (!this.files || !this.files[0]) return;
+    
+  const FR = new FileReader();
+    
+  FR.addEventListener("load", function(evt) {
+    document.querySelector("#file").src         = evt.target.result;
+    document.querySelector("#dwadwa").value = evt.target.result;
+    
+  }); 
+    
+  FR.readAsDataURL(this.files[0]);
+  
+}
+
+document.querySelector("#file").addEventListener("change", readFile);
 </script>
