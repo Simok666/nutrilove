@@ -33,7 +33,7 @@ class navbar extends Component
                 "icon"  => "users"
             ],
             "User"      => [
-                "url"   => "/admin/user",
+                "url"   => "/admin/users",
                 "icon"  => "user"
             ],
             "Content"   => [

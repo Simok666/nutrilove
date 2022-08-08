@@ -1,121 +1,259 @@
-<link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/style.css') }}">
-<form id="form" class="form-horizontal" enctype="multipart/form-data">
-    @csrf 
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-3 col-form-label">Kode</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control validasi" id="kode" name="kode">
-        </div>
-
-    </div>
-
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-3 col-form-label">Title</label>
-        <div class="col-sm-9">
-            <input type="text" class="form-control validasi" id="title" name="title">
-        </div>
-
-    </div>
-
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-3 col-form-label">Keterangan</label>
-        <div class="col-sm-9">
-            <textarea class="form-control" id="desc_content" placeholder="Keterangan" name="desc_content"></textarea>
-            <script>    
-                var options = {
-                    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
-                    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
-                    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
-                    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
-                };
-                CKEDITOR.replace( 'desc_content', options );
-            </script>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-3 col-form-label">File</label>
-        <div class="col-sm-9">
-            <input type="text" class="base64" name="file" id="dwadwa">
-            <input type="File" class="form-control validasi fileInput" id="file" name="file">
-        </div>
-
-    </div>
-    
-</form>
-
-<div class="border-top p-2 m-1" style="border-width:2px !important;">
-    <button type="button" id="save" class="btn btn-primary float-right" onClick="save()"><i class="fas fa-save"></i> Save</button>
-    <button type="button" id="delete" class="btn btn-danger" onClick="deleteData()"><i class="fas fa-trash-alt"></i> Delete</button>
-    <button type="button" onClick="initValue('name1')" class="btn btn-info float-right mr-1"><i class="fas fa-sync-alt"></i> Reset</button>
-</div>
-<div class="card-body border-top" id="table_data" style="border-width:2px !important;">
-    <div class="row">
-        <div class="col-12">
-            <table class='table table-striped' id="table1">
-                <thead>
-                    <tr>
-                        <th>Kode</th>
-                        <th>Title</th>
-                        <th>Keterangan</th>
-                        <th>File</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+<div class="modal fade text-left" id="adminModal" tabindex="-1" role="dialog"
+    aria-labelledby="AdminModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Admin Modal </h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center class="loading">
+                    <img width="100px" src="{{ asset("loading-data.gif") }}">
+                </center>
+                <form action="{! admin.upsert !}" method="POST" id="formAdmin">
+                    <label>Photo: </label>
+                    <div class="form-group">
+                        <input type="file" class="form-control fileFormBase64">
+                        <input type="hidden" class="base_64" name="fileBase64">
+                        <div class="avatar avatar-xl me-3">
+                            <img class="preview-profile base64-preview" src="{{ asset('person-icon.png') }}"
+                                alt="" srcset="">
+                        </div>
+                    </div>
+                    <label>Kode: </label>
+                    <div class="form-group">
+                        <input type="text" name="kode" placeholder="Kode" class="form-control" required>
+                        {{-- <input type="hidden" class="id" name="id"> --}}
+                    </div>
+                    <label>Title: </label>
+                    <div class="form-group">
+                        <input type="text" name="title" required placeholder="Name Title" class="form-control">
+                    </div>
+                    <label>Description: </label>
+                    <div class="form-group">
+                        <textarea class="form-control" id="desc_content" placeholder="Keterangan" name="desc_content"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button type="submit" class="btn btn-primary ml-1" form="formAdmin">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Save</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
-<script src="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script>
+
+<div class="modal fade text-left" id="adminModalEdit" tabindex="-1" role="dialog"
+    aria-labelledby="adminModalEdit"aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Admin Modal Edit </h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <i data-feather="x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <center class="loading">
+                    <img width="100px" src="{{ asset("loading-data.gif") }}">
+                </center>
+                <form action="{! admin.upsert !}" method="POST" id="formAdminEdit">
+                    <label>Kode: </label>
+                    <div class="form-group">
+                        <input type="text" name="kode" placeholder="Kode" class="form-control" required>
+                        <input type="hidden" class="id" name="id">
+                    </div>
+                    <label>Title: </label>
+                    <div class="form-group">
+                        <input type="text" name="title" required placeholder="Name Title" class="form-control">
+                    </div>
+                    <label>Description: </label>
+                    <div class="form-group">
+                        <textarea class="form-control" id="desc_content" placeholder="Keterangan" name="desc_content"></textarea>
+                    </div>
+                    <label>Photo: </label>
+                    <div class="form-group">
+                        <input type="file" class="form-control fileFormBase64">
+                        <input type="hidden" class="base_64" name="fileBase64">
+                        <div class="avatar avatar-xl me-3">
+                            <img class="preview-profile base64-preview" src="{{ asset('person-icon.png') }}"
+                                alt="" srcset="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="reset" class="btn btn-light-secondary" data-bs-dismiss="modal">
+                    <i class="bx bx-x d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Close</span>
+                </button>
+                <button type="submit" class="btn btn-primary ml-1" form="formAdminEdit">
+                    <i class="bx bx-check d-block d-sm-none"></i>
+                    <span class="d-none d-sm-block">Save</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-let table1 = document.querySelector('#table1');
-let dataTable = new simpleDatatables.DataTable(table1);
-table = new simpleDatatables.DataTable("#table1", {
-    "data":@json($data),
-    "order": [[ 0, "desc" ]],
-    "scrollY":"130px",
-    "scrollx":true,
-    "ajax": "{{ route('contents.list') }}",
-    "responsive": true,
-    "searching": false,
-    "info":false,
-    "columns": [
-        { "data": "kode" },
-        { "data": "title" },
-        { "data": "file" },
-        { "data": "desc_content" }
-    ]
-});
+    $(document).ready(function() {
+        var FrmAddAdmin = $("#formAdmin").validate({
+            submitHandler: function(form) {
+                submitData(form, "/admin/contentupsert", function (resp) {
+                    if (empty(resp.IsError)) ReloadDataTable("#UserTable")
+                })            
+            },
+            errorPlacement: function(error, element) {
+                if (element.parent(".input-group").length) {
+                    error.insertAfter(element.parent()); // radio/checkbox?
+                } else if (element.hasClass("select2") || element.hasClass("select")) {
+                    error.insertAfter(element.next("span")); // select2
+                } else {
+                    error.insertAfter(element); // default
+                }
+            }
+        });
 
-setTimeout(function () {
-    $(".overlay").addClass("d-none"); 
-    
-}, 500);
+        var FrmEditAdmin = $("#formAdminEdit").validate({
+            submitHandler: function(form) {
+                submitData(form, "/admin/contentupsert", function (resp) {
+                    if (empty(resp.IsError)) ReloadDataTable("#UserTable")
+                })
+            },
+            errorPlacement: function(error, element) {
+                if (element.parent(".input-group").length) {
+                    error.insertAfter(element.parent()); // radio/checkbox?
+                } else if (element.hasClass("select2") || element.hasClass("select")) {
+                    error.insertAfter(element.next("span")); // select2
+                } else {
+                    error.insertAfter(element); // default
+                }
+            }
+        });
 
-$('#table1 tbody').on('click', 'tr', function () {
-  var table = new simpleDatatables.DataTable(table1);
-  var data = table.row( this ).data();
-  for (const [key, value] of Object.entries(data)) {
-    $("#"+key).val(value);
-  }
-} )
+        $("#UserTable tbody").on("click", ".btn-admin-delete", function() {
+            let data = $(this).data();
+            Swal.fire({
+                title: 'Anda Yakin akan menghapus "' + data.name + '" ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    ajaxData("/delete/content", {
+                        "id": data.id
+                    }, function(resp) {
+                        toastrshow("success", "Data berhasil dihapus", "Success");
+                        ReloadDataTable("#UserTable")
+                    })
+                }
+            })
+        })
 
-function readFile() {
-  
-  if (!this.files || !this.files[0]) return;
-    
-  const FR = new FileReader();
-    
-  FR.addEventListener("load", function(evt) {
-    document.querySelector("#file").src         = evt.target.result;
-    document.querySelector("#dwadwa").value = evt.target.result;
-    
-  }); 
-    
-  FR.readAsDataURL(this.files[0]);
-  
-}
+        $("#UserTable tbody").on("click", ".btn-admin-update", function() {
+            let data = $(this).data();
+            $("#adminModalEdit").modal("show")
+            showLoading("#adminModalEdit", true)
+            hiddenComponent("#formAdminEdit", true)
+            ajaxData("/detail/content", {
+                "id": data.id
+            }, function (resp) {
+                if (!empty(resp.Data)) {
+                    showLoading("#adminModalEdit", false)
+                    $.each(resp.Data[0], function (index, value) { 
+                         $("#formAdminEdit").find("[name="+ index +"]").val(value)
+                    });
 
-document.querySelector("#file").addEventListener("change", readFile);
+                    if (!empty(resp.Data[0].file)) {
+                        $("#adminModalEdit").find(".base64-preview").attr("src", base_url + '/'+ resp.Data[0].file);
+                    }
+                    hiddenComponent("#formAdminEdit", false)
+                } else {
+                    hideModal("#adminModalEdit")
+                    toastrshow("warning", "Data yang anda cari tidak ditemukan", "Failled")
+                }
+            })
+        })
+
+        $(".btn-admin-tambah").click(function () {
+            $("#adminModal .loading").addClass("d-none");
+        })
+    });
+
+
+
+    $(".fileFormBase64").change(function() {
+        let selector = $(this);
+        let parent = $(this).parent();
+
+        if (!this.files || !this.files[0]) {
+            return;
+        }
+        let tipefile = this.files[0].type.toString();
+        if (tipefile != "image/png" && tipefile != "image/jpeg" && tipefile != "image/bmp") {
+            $(this).val("");
+            toastrshow("warning", "Format salah, pilih file dengan format jpg/png/bmp", "Warning");
+            return;
+        }
+        // if((this.files[0].size / 1024) > 2048){
+        //     $(this).val("");
+        //     toastrshow("warning", "Maximum file size is 2 MB", "Warning");
+        //     return;
+        // }
+
+        let FR = new FileReader();
+        FR.addEventListener("load", function(readerEvent) {
+            let image = new Image();
+            image.onload = function(imageEvent) {
+                let canvas = document.createElement("canvas"),
+                    max_size = 300, // TODO : pull max size from a site config
+                    width = image.width,
+                    height = image.height;
+
+                if (width > height) {
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                } else {
+                    if (height > max_size) {
+                        width *= max_size / height;
+                        height = max_size;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+
+                let base64 = canvas.toDataURL("image/jpeg");
+                image_base64 = base64;
+                // base64 = base64.replace(/^data:image\/(png|jpg|jpeg|bmp);base64,/, '');
+                parent.find(".base_64").val(base64);
+                parent.find(".fileChange").val(1);
+                parent.find(".base64-preview").prop("src", image_base64);
+            };
+            image.src = readerEvent.target.result;
+        });
+        FR.readAsDataURL(this.files[0]);
+    });
+
+    $(".modal").on('hide.bs.modal', function (event) {
+        $(this).find('input').val("");
+        $(this).find('select').val("").trigger('change');
+        $(this).find('textarea').val("").trigger('change');
+        $(this).find('.loading').removeClass('hidden');
+        $(this).find('.base64-preview').attr("src" , "{{ asset('person-icon.png') }}")
+    });
 </script>

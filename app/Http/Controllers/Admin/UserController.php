@@ -28,6 +28,7 @@ class UserController extends Controller
                 ';
                 return $item;
             }, $data["data"]);
+            // print_r($data["data"]);
             unset($data["queries"]);
             return $data;
         }
