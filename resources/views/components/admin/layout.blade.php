@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> {{ empty($title) ? '' : $title . ' | ' }} {{ config('app.name') }} </title>
 
     <link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/css/bootstrap.css') }}">
@@ -15,7 +16,16 @@
     <link rel="stylesheet" href="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/sweetalert2/bootstrap-4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/toastr/toastr.min.css') }}">
-    
+    <style>
+        label.error{
+            color:red;
+            text-transform: capitalize;
+        }
+
+        .modal-content{
+            /* overflow: auto!important */
+        }
+    </style>
     {{ $styles ?? '' }}
 </head>
 
@@ -35,9 +45,14 @@
                 @isset($title)
                     <div class="page-title">
                         <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="col-md-6">
                                 <h3>{{ $title }}</h3>
                             </div>
+                            @isset( $buttons )
+                            <div class="col-md-6">
+                                {{ $buttons }}
+                            </div>
+                            @endisset
                         </div>
                     </div>
                 @endisset
@@ -58,6 +73,7 @@
     <script src="{{ asset('admin_assets/dist/assets/js/main.js') }}"></script>
     <script src="{{ asset('admin_assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('admin_assets/plugins/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin_assets/plugins/jquery.validate.min.js') }}"></script>
     <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
     <script src="{{ asset('dashboard.js') }}"></script>
 
