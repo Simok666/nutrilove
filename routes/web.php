@@ -24,16 +24,18 @@ Route::get('/admin/blank', function () {
     return view('admin/admin');
 });
 
-Route::get('/test', [UserController::class,'index'])->name('user.index');
+Route::get('/admin/users', [UserController::class,'index'])->name('user.index');
+Route::get('/content', [AdminController::class,'ajaxContent'])->name('admin.content');
 
 Route::get('/admin/content',[AdminController::class,'showContent'])->name('content');
 Route::post('/showtable/{table}',[AdminController::class,'showtables'])->name('tables') ;
 Route::post('/save/{table}',[AdminController::class,'save']);
 Route::post('/delete/{table}',[AdminController::class,'delete']);
 Route::post('/detail/{table}',[AdminController::class,'detail']);
-Route::get('/contents/list', [AdminController::class, 'getContent'])->name('contents.list');
+
 
 Route::post('/users/upsert/',[UserController::class,'upsert']);
+Route::post('/admin/contentupsert/',[AdminController::class,'contentUpsert']);
 
 Route::get('/index', function () {
     return view('user.index');
