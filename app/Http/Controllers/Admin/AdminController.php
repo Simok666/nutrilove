@@ -64,5 +64,38 @@ class AdminController extends Controller
         );
         echo json_encode("oke");
     }
+
+    public function delete(Request $request, $table)
+    {
+        $data = DB::table($table)->where('id', '=', $request["id"])->delete();
+        if ($data) {
+            $status = false;
+            $message = "Data Berhasi dihapus";
+        } else {
+            $status = true;
+            $message = "Data Gagal dihapus";
+        }
+        return [
+            "IsError"   => $status , 
+            "Message"   => $message
+        ];
+    }
+
+    public function detail(Request $request, $table)
+    {
+        $data = DB::table($table)->where('id', '=', $request["id"])->get();
+        if ($data) {
+            $status = false;
+            $message = "Data Berhasi";
+        } else {
+            $status = true;
+            $message = "Data tidak ada";
+        }
+        return [
+            "IsError"   => $status , 
+            "Message"   => $message,
+            "Data"      => $data
+        ];
+    }
     
 }

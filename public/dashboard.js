@@ -97,3 +97,173 @@ function success() {
 		title: 'Data Berhasil Disimpan !'
 	})
 }
+
+const ReloadDataTable = (selector) => $(selector).DataTable().ajax.reload();;
+
+function submitData(selectorform, url, successfunc, errorfunc) {
+	successfunc = (typeof successfunc !== 'undefined') ? successfunc : "";
+	errorfunc = (typeof errorfunc !== 'undefined') ? errorfunc : "";
+	var formdata = $(selectorform).serialize();
+	$.ajax({
+		type: "POST",
+		url: base_url + url,
+		data: formdata,
+		dataType: "JSON",
+		tryCount: 0,
+		retryLimit: 3,
+		success: function (resp) {
+			if (resp.IsError == false) {
+				toastrshow("success", "Data berhasil disimpan", "Success");
+				$(selectorform).parents(".modal").modal("hide"); //Tutup modal
+				resetForm(selectorform) // Reset Form
+				if (successfunc != "") {
+					successfunc(resp);
+				}
+			} else {
+				toastrshow("error", resp.Message, "Error");
+				if (errorfunc != "") {
+					errorfunc();
+				}
+			}
+		},
+		error: function (xhr, textstatus, errorthrown) {
+			setTimeout(function () {
+				// $(".modal").modal("hide");
+				toastrshow("warning", "Ops.! Something wrong.", "Peringatan");
+			}, 500);
+		}
+	});
+}
+
+const ajaxData = (url, data, successfunc, errorfunc, beforefunc) => {
+	successfunc = (typeof successfunc !== 'undefined') ? successfunc : "";
+	errorfunc = (typeof errorfunc !== 'undefined') ? errorfunc : "";
+	beforefunc = (typeof beforefunc !== 'undefined') ? beforefunc : "";
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: data,
+		dataType: "JSON",
+		beforeSend: function () {
+			if (!empty(beforefunc)) {
+				beforefunc()
+			}
+		},
+		tryCount: 0,
+		retryLimit: 3,
+		success: function (resp) {
+			if (resp.IsError == false) {
+				if (successfunc != "") {
+					successfunc(resp);
+				}
+			} else {
+				toastrshow("error", resp.Message, "Error");
+				if (errorfunc != "") {
+					errorfunc();
+				}
+			}
+		},
+		error: function (xhr, textstatus, errorthrown) {
+			if (textstatus == "timeout") {
+				this.tryCount++;
+				if (this.tryCount <= this.retryLimit) {
+					$.ajax(this);
+				}
+			} else {
+				swal.fire("Gagal", "Ops.! Something wrong.", "error");
+				if (!empty(errorfunc)) {
+					errorfunc();
+				}
+			}
+		}
+	});
+}
+
+function Change_file($file) {
+	return base_url + "/file/" + $file;
+}
+
+$(".no , input[type=number] ").attr("onkeypress", "return isNumber(event)");
+
+$(".loading-gif-image").attr('src', base_url + "/assets/img/loading-data.gif");
+
+function isNumber(evt) {
+	evt = (evt) ? evt : window.event;
+	var charCode = (evt.which) ? evt.which : evt.keyCode;
+	if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+		return false;
+	}
+	return true;
+}
+
+function hideModal(selector) {
+	setTimeout(() => {
+		$(selector).modal("hide")
+	}, 1000);
+}
+
+const showLoading = (selector, show) => {
+	if (show) $(selector).find(".loading").removeClass("d-none");
+	else $(selector).find(".loading").addClass("d-none");
+}
+
+const hiddenComponent = (selector, show) => {
+	if (show) $(selector).addClass("d-none");
+	else $(selector).removeClass("d-none");
+}
+
+function in_array(search, array, column) {
+	if (empty(column)) {
+		column = "";
+	}
+
+	var length = array.length;
+	for (var i = 0; i < length; i++) {
+		if (!empty(column)) {
+			if (array[i][column] == search) return true;
+		} else {
+			if (array[i] == search) return true;
+		}
+	}
+	return false;
+}
+
+function empty(string) {
+	return (string == undefined || string == "" || string == null);
+}
+
+function resetvalue(selector) {
+	$(selector).find("select").val("").trigger("change");
+	$(selector).find("input").val("");
+}
+
+function toastrshow(type, title, message) {
+	message = (typeof message !== 'undefined') ? message : "";
+	toastr.options = {
+		closeButton: true,
+		progressBar: true,
+		showMethod: "slideDown",
+		positionClass: "toast-top-right",
+		timeOut: 3000,
+		onclick: null,
+		showMethod: "fadeIn",
+		hideMethod: "fadeOut",
+	}
+	switch (type) {
+		case "success": toastr["success"](title, message); break;
+		case "info": toastr["info"](title, message); break;
+		case "warning": toastr["warning"](title, message); break;
+		case "error": toastr["error"](title, message); break;
+		default: toastr["info"](title, message); break;
+	}
+}
+
+const resetForm = (selector) => $(selector).find("input,select,textarea").val("").trigger("change")
+
+$(document).ajaxComplete(function (event, request, settings) {
+	feather.replace()
+});
+
+$.ajaxSetup({
+    headers: { 'X-CSRF-TOKEN':  $('meta[name="csrf-token"]').attr('content') }
+});
