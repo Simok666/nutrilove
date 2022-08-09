@@ -201,7 +201,7 @@
                     hiddenComponent("#formAdminEdit", false)
                 } else {
                     hideModal("#adminModalEdit")
-                    toastrshow("warning", "Data yang anda cari tidak ditemukan", "Failled")
+                    toastrshow("warning", "Data yang anda cari tidak ditemukan", "Failed")
                 }
             })
         })

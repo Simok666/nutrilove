@@ -14,14 +14,14 @@ class CreateMenuTable extends Migration
     public function up()
     {
         Schema::create('menu', function (Blueprint $table) {
-            $table->increments('id')->first();
-            $table->char('title',255);
-            $table->char('name',50);
-            $table->char('icon',50);
-            $table->char('function',50);
-            $table->char('color',50);
-            $table->char('url',50)->unsigned()->nullable();
-            $table->char('view',50);
+            $table->id();
+            $table->string('title');
+            $table->string('name');
+            $table->string('icon');
+            $table->string('function');
+            $table->string('color');
+            $table->string('url')->nullable();
+            $table->string('view');
             $table->boolean('newtab')->default(0);
         });
     }

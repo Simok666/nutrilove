@@ -14,11 +14,12 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->char('kode',255)->first();
-            $table->char('title',255);
+            $table->id();
+            $table->string('kode');
+            $table->string('title');
             $table->longText('desc_content');
             $table->longText('file');
-            $table->char('posted_by',255);
+            $table->string('posted_by');
             $table->longText('updated_at');
             $table->date('datetime');
         });

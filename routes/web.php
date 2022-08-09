@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\SettingGiziController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.index');
 });
 
 
@@ -36,6 +37,9 @@ Route::post('/detail/{table}',[AdminController::class,'detail']);
 
 Route::post('/users/upsert/',[UserController::class,'upsert']);
 Route::post('/admin/contentupsert/',[AdminController::class,'contentUpsert']);
+
+route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
+route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
 
 Route::get('/index', function () {
     return view('user.index');
