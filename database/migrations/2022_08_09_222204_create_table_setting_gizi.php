@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateContentTable extends Migration
+class CreateTableSettingGizi extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateContentTable extends Migration
      */
     public function up()
     {
-        Schema::create('content', function (Blueprint $table) {
+        Schema::create('setting_gizi', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('title');
-            $table->longText('desc_content');
-            $table->longText('file');
+            $table->float("nilai_rumus");
+            $table->string("keterangan");
+            $table->string("pesan");
+            $table->timestamps();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateContentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('content');
+        Schema::dropIfExists('setting_gizi');
     }
 }
