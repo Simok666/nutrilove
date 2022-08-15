@@ -18,7 +18,8 @@ class CreateContentTable extends Migration
             $table->string('kode');
             $table->string('title');
             $table->longText('desc_content');
-            $table->longText('file');
+            $table->string('file')->default("");
+            $table->timestamps();
         });
     }
 

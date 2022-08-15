@@ -40,6 +40,10 @@ class navbar extends Component
                 "url"   => "/admin/content",
                 "icon"  => "file"
             ],
+            "Article"   => [
+                "url"   => "/admin/article",
+                "icon"  => "file"
+            ],
             "Gizi"      => [
                 "url"   => "#",
                 "icon"  => "droplet",

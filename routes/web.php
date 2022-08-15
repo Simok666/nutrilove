@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingGiziController;
+use App\Http\Controllers\Admin\ContentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,6 @@ Route::get('/admin/blank', function () {
 Route::get('/admin/users', [UserController::class,'index'])->name('user.index');
 Route::get('/content', [AdminController::class,'ajaxContent'])->name('admin.content');
 
-Route::get('/admin/content',[AdminController::class,'showContent'])->name('content');
 Route::post('/showtable/{table}',[AdminController::class,'showtables'])->name('tables') ;
 Route::post('/save/{table}',[AdminController::class,'save']);
 Route::post('/delete/{table}',[AdminController::class,'delete']);
@@ -37,6 +37,10 @@ Route::post('/detail/{table}',[AdminController::class,'detail']);
 
 Route::post('/users/upsert/',[UserController::class,'upsert']);
 Route::post('/admin/contentupsert/',[AdminController::class,'contentUpsert']);
+
+Route::get('/admin/content',[ContentController::class,'index'])->name('content');
+Route::get('admin/content/form',[ContentController::class,'form'])->name('content.form');
+Route::post('admin/content/upsert',[ContentController::class,'upsert'])->name('content.upsert');
 
 route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
 route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');

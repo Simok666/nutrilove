@@ -49,7 +49,7 @@
                                 <h3>{{ $title }}</h3>
                             </div>
                             @isset( $buttons )
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="text-align-last: right;">
                                 {{ $buttons }}
                             </div>
                             @endisset
