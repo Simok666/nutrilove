@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingGiziController;
 use App\Http\Controllers\Admin\ContentController;
+use App\Http\Controllers\Admin\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::post('/admin/contentupsert/',[AdminController::class,'contentUpsert']);
 Route::get('/admin/content',[ContentController::class,'index'])->name('content');
 Route::get('admin/content/form',[ContentController::class,'form'])->name('content.form');
 Route::post('admin/content/upsert',[ContentController::class,'upsert'])->name('content.upsert');
+
+Route::get('/admin/article',[ArticleController::class,'index'])->name('article');
+Route::get('admin/article/form',[ArticleController::class,'form'])->name('article.form');
+Route::post('admin/article/upsert',[ArticleController::class,'upsert'])->name('article.upsert');
 
 route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
 route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
