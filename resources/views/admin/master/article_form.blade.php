@@ -5,6 +5,7 @@
                 float: right;
             }
         </style>
+        <link rel="stylesheet" href="{{ asset('admin_assets/plugins/select/select2.min.css') }}">
         <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
     </x-slot>
 
@@ -35,14 +36,21 @@
                                             <input type="hidden" class="form-control validasi"
                                             name="id">
                                     </div>
-
                                 </div>
-
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Title</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control validasi" id="title"
+                                        <input type="text" class="form-control validasi" 
                                             name="title" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Category</label>
+                                    <div class="col-sm-9">
+                                        <select class="form-control select2 id_category" multiple required>
+                                            <option value="">Choose Category</option>
+                                        </select>
+                                        <input type="hidden" name="id_category">
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -75,7 +83,7 @@
     </div>
 
     <x-slot name="scripts">
-
+        <script src="{{ url("/admin_assets/plugins/select/select2.full.min.js") }}"></script>
         <script>
             CKEDITOR.replace('editor1', {
                 fullPage: true,
@@ -123,6 +131,7 @@
                                 .file);
                         }
                         hiddenComponent(".card-body", false)
+                        getSelectCategoryArticle(resp.Data[0].id_category)
                     } else {
                         toastrshow("warning", "Data yang anda cari tidak ditemukan", "Failed")
                         setTimeout(() => {
@@ -189,10 +198,31 @@
 
             $(document).ready(function () {
                 let id = "{{ $id_update }}"
+                $(".select2").select2();
                 if (!empty(id)) {
                     getDataDetail(id)
+                } else {
+                    getSelectCategoryArticle(0)
                 }
             });
+
+            const getSelectCategoryArticle = (selected) => {
+                ajaxData("{{ url("/admin/article/kategori") }}" , {
+                    is_select : true
+                }, function (resp) {
+                    if (empty(resp.IsError)) {
+                        $(".id_category").html(resp.data)                        
+                    }
+                    if (!empty(selected)) {
+                        selected = selected.split(",")
+                        $(".id_category").val( selected).trigger("change")
+                    }
+                })
+            } 
+
+            $(".id_category").change(function () { 
+                $("[name=id_category]").val($(this).val())
+            })
         </script>
     </x-slot>
 

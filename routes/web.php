@@ -47,6 +47,10 @@ Route::get('/admin/article',[ArticleController::class,'index'])->name('article')
 Route::get('admin/article/form',[ArticleController::class,'form'])->name('article.form');
 Route::post('admin/article/upsert',[ArticleController::class,'upsert'])->name('article.upsert');
 
+Route::get('/admin/article/kategori',[ArticleController::class,'category'])->name('article_category');
+Route::post('/admin/article/kategori',[ArticleController::class,'category'])->name('article_category');
+Route::post('admin/article/kategori/upsert',[ArticleController::class,'category_upsert'])->name('article_category.upsert');
+
 route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
 route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
 

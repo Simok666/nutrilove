@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Articles extends Model
+class ArticleCategory extends Model
 {
-    protected $table = 'articles';
+    protected $table = 'article_category';
     /**
      * The attributes that are mass assignable.
      *
@@ -15,11 +15,7 @@ class Articles extends Model
      */
     protected $fillable = [
         "kode",
-        "title",
-        "desc_content",
-        "file",
-        "posted_by",
-        "id_category"
+        "nama"
     ];
 
     public $timestamps = true;

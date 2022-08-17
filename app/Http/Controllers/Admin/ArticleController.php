@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\ArticleCategory;
 
 class ArticleController extends Controller
 {
@@ -106,6 +108,85 @@ class ArticleController extends Controller
         $data["posted_by"] = empty(Auth::user()->username) ? "Admin": Auth::user()->username;
 
         $data = Articles::updateOrCreate(
+            ['id' => $request->id],
+            $data
+        );
+
+        if ($data) {
+            $resutl = [
+                "IsError" => false,
+                "Message"   => "Data Berhasil Disimpan"
+            ];
+        } else {
+            $resutl = [
+                "IsError" => true,
+                "Message"   => "Data Gagal Disimpan"
+            ];
+        }
+
+        ResultData:
+        return $resutl;
+    }
+
+    public function category(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->is_select) {
+                $data = ArticleCategory::get();
+                $result = "";
+                foreach ($data as $key => $item) {
+                    $result .=  "<option value='".$item->id."'>". $item->nama ."</option>";
+                }
+                return [
+                    "IsError"   => false,
+                    "Message"   => "Data Berhasil",
+                    "data"      => $result
+                ];
+            }
+
+            $data = DataTables::of(DB::table("article_category"))->toArray();
+            $data["data"] = array_map(function ($item) {
+                $item["action"] = '
+                <button class="btn btn-warning icon btn-update" data-id="' . $item["id"] . '">
+                    <i data-feather="edit"></i>
+                </button>
+                <button class="btn btn-danger icon btn-delete" data-id="' . $item["id"] . '" data-name="' . $item["kode"] . '">
+                    <i data-feather="trash-2"></i>
+                </button>
+                ';
+                return $item;
+            }, $data["data"]);
+            // print_r($data["data"]);
+            unset($data["queries"]);
+            return $data;
+        }
+
+        return view('admin.category_article');
+    }
+
+    public function category_upsert(Request $request)
+    {
+        $data = $request->all();
+
+        if (!empty($request->kode)) {
+            $rules = array('kode' => 'required|unique:article_category,kode');
+
+            if (!empty($request->id)) {
+                $rules["kode"] = $rules["kode"] . ',' . $request->id;
+            }
+
+            $validator = Validator::make($data, $rules);
+
+            if ($validator->fails()) {
+                $resutl = [
+                    "IsError" => true,
+                    "Message"   => "That kode is already registered"
+                ];
+                goto ResultData;
+            }
+        }
+
+        $data = ArticleCategory::updateOrCreate(
             ['id' => $request->id],
             $data
         );
