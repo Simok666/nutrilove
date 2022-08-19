@@ -1,4 +1,4 @@
-<x-admin.layout title="Content">
+<x-admin.layout title="Category Article">
     <x-slot name="styles">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <style>
@@ -9,9 +9,9 @@
     </x-slot>
 
     <x-slot name="buttons">
-        <a href="{{ url("admin/content/form") }}" class="btn btn-primary btn-sm btn-right btn-tambah" >
-            <i data-feather="plus"></i> Add Content
-        </a>
+        <button class="btn btn-primary btn-sm btn-right btn-tambah" data-bs-toggle="modal" data-bs-target="#addCategory">
+            <i data-feather="plus"></i> Add Category
+        </button>
     </x-slot>
 
     <div class="row match-height">
@@ -19,12 +19,12 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body" style="overflow: scroll">
-                        <table class='table table-striped' id="ContentTable" urlAjax="{{ url("admin/content") }}">
+                        <table class='table table-striped' id="tableCategory" urlAjax="{!! route('article_category') !!}">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
-                                    <th>Title</th>
-                                    <th style="width: 10%">Action</th>
+                                    <th>Nama</th>
+                                    <th style="width: 80px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,19 +37,18 @@
     </div>
 
     <x-slot name="scripts">
-        {{-- <script src="{{ asset('admin_assets/dist/assets/vendors/simple-datatables/simple-datatables.js') }}"></script> --}}
         <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
         <script>
             $(function() {
-                initDatatable("#ContentTable" , 
+                initDatatable("#tableCategory" , 
                     [{ // mengambil & menampilkan kolom sesuai tabel database
                             data: 'kode',
-                            name: 'Kode'
+                            name: 'kode'
                         },
                         {
-                            data: 'title',
-                            name: 'Title'
+                            data: 'nama',
+                            name: 'nama'
                         },
                         {
                             data: 'action',
@@ -85,36 +84,9 @@
                     settingsDatatable
                 );
             }
-
-            $("#ContentTable tbody").on("click", ".btn-delete", function() {
-                let data = $(this).data();
-                Swal.fire({
-                    title: 'Anda Yakin akan menghapus "' + data.name + '" ?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Hapus',
-                    cancelButtonText: 'Batal',
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        ajaxData("/delete/content", {
-                            "id": data.id
-                        }, function(resp) {
-                            toastrshow("success", "Data berhasil dihapus", "Success");
-                            ReloadDataTable("#ContentTable")
-                        })
-                    }
-                })
-            })
-
-            $("#ContentTable tbody").on("click", ".btn-update", function() {
-                let data = $(this).data();
-                location.href = "{{ url("admin/content/form?id=") }}" + data.id
-            })
         </script>
     </x-slot>
 
 </x-admin.layout>
 
-@include('admin.master.default')
+@include('admin.master.article_category')

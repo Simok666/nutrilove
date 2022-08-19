@@ -1,4 +1,4 @@
-<x-admin.layout title="Content">
+<x-admin.layout title="Article">
     <x-slot name="styles">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
         <style>
@@ -9,8 +9,8 @@
     </x-slot>
 
     <x-slot name="buttons">
-        <a href="{{ url("admin/content/form") }}" class="btn btn-primary btn-sm btn-right btn-tambah" >
-            <i data-feather="plus"></i> Add Content
+        <a href="{{ url("admin/article/form") }}" class="btn btn-primary btn-sm btn-right btn-tambah" >
+            <i data-feather="plus"></i> Add Article
         </a>
     </x-slot>
 
@@ -19,11 +19,12 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body" style="overflow: scroll">
-                        <table class='table table-striped' id="ContentTable" urlAjax="{{ url("admin/content") }}">
+                        <table class='table table-striped' id="ArticleTable" urlAjax="{{ url("admin/article") }}">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
                                     <th>Title</th>
+                                    <th>Posted By</th>
                                     <th style="width: 10%">Action</th>
                                 </tr>
                             </thead>
@@ -42,7 +43,7 @@
 
         <script>
             $(function() {
-                initDatatable("#ContentTable" , 
+                initDatatable("#ArticleTable" , 
                     [{ // mengambil & menampilkan kolom sesuai tabel database
                             data: 'kode',
                             name: 'Kode'
@@ -50,6 +51,10 @@
                         {
                             data: 'title',
                             name: 'Title'
+                        },
+                        {
+                            data: 'posted_by',
+                            name: 'posted_by'
                         },
                         {
                             data: 'action',
@@ -86,7 +91,7 @@
                 );
             }
 
-            $("#ContentTable tbody").on("click", ".btn-delete", function() {
+            $("#ArticleTable tbody").on("click", ".btn-delete", function() {
                 let data = $(this).data();
                 Swal.fire({
                     title: 'Anda Yakin akan menghapus "' + data.name + '" ?',
@@ -98,19 +103,19 @@
                     cancelButtonText: 'Batal',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        ajaxData("/delete/content", {
+                        ajaxData("/delete/articles", {
                             "id": data.id
                         }, function(resp) {
                             toastrshow("success", "Data berhasil dihapus", "Success");
-                            ReloadDataTable("#ContentTable")
+                            ReloadDataTable("#ArticleTable")
                         })
                     }
                 })
             })
 
-            $("#ContentTable tbody").on("click", ".btn-update", function() {
+            $("#ArticleTable tbody").on("click", ".btn-update", function() {
                 let data = $(this).data();
-                location.href = "{{ url("admin/content/form?id=") }}" + data.id
+                location.href = "{{ url("admin/article/form?id=") }}" + data.id
             })
         </script>
     </x-slot>
