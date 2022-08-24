@@ -26,8 +26,9 @@ Route::get('/', function () {
 Route::get('/admin/blank', function () {
     return view('admin/admin');
 });
-
+Route::middleware('guest')->group(function () { 
 Route::get('/admin/users', [UserController::class,'index'])->name('user.index');
+Route::get('/dashboard', [UserController::class,'index'])->name('admin.index');
 Route::get('/content', [AdminController::class,'ajaxContent'])->name('admin.content');
 
 Route::post('/showtable/{table}',[AdminController::class,'showtables'])->name('tables') ;
@@ -53,7 +54,7 @@ Route::post('admin/article/kategori/upsert',[ArticleController::class,'category_
 
 route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
 route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
-
+});
 Route::get('/index', function () {
     return view('user.index');
 })->name('users.index');
@@ -69,3 +70,5 @@ Route::get('/articles', function () {
 Route::get('/single-articles', function () {
     return view('user.single_blog');
 })->name('users.singleblogs');
+
+require __DIR__.'/auth.php';
