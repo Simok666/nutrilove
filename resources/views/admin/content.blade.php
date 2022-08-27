@@ -62,30 +62,6 @@
                 )
             });;
 
-            const initDatatable = (selector , columns = {} , settings = {}) => {
-                let tableSelector = $(selector);
-                let settingsDatatable = {
-                    processing: true,
-                    responsive: true,
-                    serverSide: true,
-                    ajax: tableSelector.attr("urlAjax"), // memanggil route yang menampilkan data json
-                }
-
-                if (columns != {} ) {
-                    settingsDatatable.columns = columns
-                }
-
-                if (settings != {}) {
-                    $.each(settings, function (index, item) { 
-                        settingsDatatable[index] = item
-                    });
-                }
-
-                let dataTable = $(selector).DataTable(
-                    settingsDatatable
-                );
-            }
-
             $("#ContentTable tbody").on("click", ".btn-delete", function() {
                 let data = $(this).data();
                 Swal.fire({
