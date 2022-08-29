@@ -261,7 +261,11 @@ function toastrshow(type, title, message) {
 const resetForm = (selector) => $(selector).find("input,select,textarea").val("").trigger("change")
 
 $(document).ajaxComplete(function (event, request, settings) {
-	feather.replace()
+	try {
+		feather.replace()
+	} catch (error) {
+		console.log("Feather icons not found")
+	}
 });
 
 $.ajaxSetup({
