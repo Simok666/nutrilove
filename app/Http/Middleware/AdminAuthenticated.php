@@ -25,6 +25,10 @@ class AdminAuthenticated
 
             // if user is not admin take him to his dashboard
             if ( $user->hasRole('user') ) {
+                if ($request->ajax()){
+                    return ['is_error' => true];
+                }
+
                 return redirect(route('user.index'));
             }
 

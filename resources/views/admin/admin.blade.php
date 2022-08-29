@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body" style="overflow: scroll">
-                        <table class='table table-striped' id="UserTable" urlAjax="{!! route('user.index') !!}">
+                        <table class='table table-striped' id="UserTable" urlAjax="{!! route('admin.index') !!}">
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -71,30 +71,6 @@
 
                 )
             });;
-
-            const initDatatable = (selector , columns = {} , settings = {}) => {
-                let tableSelector = $(selector);
-                let settingsDatatable = {
-                    processing: true,
-                    responsive: true,
-                    serverSide: true,
-                    ajax: tableSelector.attr("urlAjax"), // memanggil route yang menampilkan data json
-                }
-
-                if (columns != {} ) {
-                    settingsDatatable.columns = columns
-                }
-
-                if (settings != {}) {
-                    $.each(settings, function (index, item) { 
-                        settingsDatatable[index] = item
-                    });
-                }
-
-                let dataTable = $("#UserTable").DataTable(
-                    settingsDatatable
-                );
-            }
         </script>
     </x-slot>
 
