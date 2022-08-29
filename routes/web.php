@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingGiziController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\User\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::post('/save/{table}', [AdminController::class, 'save']);
     Route::post('/delete/{table}', [AdminController::class, 'delete']);
     Route::post('/detail/{table}', [AdminController::class, 'detail']);
-    
+
     Route::post('/users/upsert/', [UserController::class, 'upsert']);
     Route::post('/admin/contentupsert/', [AdminController::class, 'contentUpsert']);
 
@@ -67,6 +68,9 @@ Route::get('/aboutus', function () {
 Route::get('/articles', function () {
     return view('user.blog');
 })->name('users.blogs');
+
+Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgizi');
+Route::post('/cekgizi', [FrontendController::class, "cekgizi"]);
 
 Route::get('/single-articles', function () {
     return view('user.single_blog');
