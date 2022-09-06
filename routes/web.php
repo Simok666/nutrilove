@@ -72,6 +72,8 @@ Route::get('/articles', function () {
 Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgizi');
 Route::post('/cekgizi', [FrontendController::class, "cekgizi"]);
 
+Route::get('/cekgizi/{id}', [FrontendController::class, "cekgiziDetail"])->name('user.cekgiziDetail');
+
 Route::get('/single-articles', function () {
     return view('user.single_blog');
 })->name('users.singleblogs');

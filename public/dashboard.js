@@ -122,7 +122,7 @@ function submitData(selectorform, url, successfunc, errorfunc) {
 			} else {
 				toastrshow("error", resp.Message, "Error");
 				if (errorfunc != "") {
-					errorfunc();
+					errorfunc(resp);
 				}
 			}
 		},
@@ -258,7 +258,7 @@ function toastrshow(type, title, message) {
 	}
 }
 
-const resetForm = (selector) => $(selector).find("input,select,textarea").val("").trigger("change")
+const resetForm = (selector) => $(selector).find("input,select,textarea").not("[type=radio]").val("").trigger("change")
 
 $(document).ajaxComplete(function (event, request, settings) {
 	try {

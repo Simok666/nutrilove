@@ -27,11 +27,12 @@
                                     value="Perempuan (Tidak Hamil)" required="">
                                 <label class="form-check-label" for="inlineRadio2">Perempuan (Tidak Hamil)</label>
                             </div>
+                            <input type="hidden" name="jenis_kelamin">
                         </div>
                         <div class="form-row">
                             <div class="form-group ">
-                                <label><b>Umur</b></label>
-                                <input type="number" name="umur" min="0" step="0.1" max="200" class="form-control"
+                                <label><b>Usia</b></label>
+                                <input type="number" name="usia" min="0" step="0.1" max="200" class="form-control"
                                     placeholder="Tahun" required="">
                             </div>
                             <div class="form-group ">
@@ -64,13 +65,22 @@
         </div>
     </section><!-- End About Section -->
 </x-user.layout>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
     var FrmEditAdmin = $("#cekGizi").validate({
         submitHandler: function(form) {
             setTimeout(() => {
+                let jenis_kelamin = $("input[name='jk']:checked").val();
+                $("input[name='jenis_kelamin']").val(jenis_kelamin);
                 submitData(form, "/cekgizi", function(resp) {
-                    // if (empty(resp.IsError)) location.href = "{{ url('admin/content') }}"
+                    if (resp.IsError === false) {
+                        location.href= base_url + "/cekgizi/" + resp.Data.idEncript
+                    }
+                }, function (resp) {  
+                    if (resp.Type == "Login") {
+                        $("LoginModal").modal("show");
+                    }
                 })
             }, 400);
         },
