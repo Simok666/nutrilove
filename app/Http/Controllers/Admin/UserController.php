@@ -78,7 +78,7 @@ class UserController extends Controller
             $imageName = Str::random(10) . '.' . $extension;
 
             $request->validate([
-                $file => 'mimes:jpeg,bmp,png|max:1000' // Only allow .jpg, .bmp and .png file types.
+                $file => 'mimes:jpeg,bmp,png' // Only allow .jpg, .bmp and .png file types.
             ]);
             $data['photo'] = Storage::disk('public')->put($imageName, base64_decode($image));
             $data['photo'] = 'storage/'.$imageName;

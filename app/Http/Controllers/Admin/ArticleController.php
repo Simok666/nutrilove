@@ -19,7 +19,12 @@ class ArticleController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = DataTables::of(Articles::query())->toArray();
+            $data = DataTables::of(Articles::with("category","user"))
+            /* ->addColumn('users', function (Articles $post) { 
+
+                return $post->user->name; 
+
+            }) */->toArray();
             $data["data"] = array_map(function ($item) {
                 $item["action"] = '
                 <button class="btn btn-warning icon btn-update" data-id="' . $item["id"] . '">
@@ -47,6 +52,7 @@ class ArticleController extends Controller
     public function upsert(Request $request)
     {
         $data = $request->all();
+        $data["user_id"] = Auth::user()->id;
 
         if (!empty($request->kode)) {
             $rules = array('kode' => 'required|unique:articles,kode');

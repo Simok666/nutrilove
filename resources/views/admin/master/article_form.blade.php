@@ -47,10 +47,10 @@
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Category</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control select2 id_category" multiple required>
+                                        <select class="form-control select2 id_category" name="id_category" required>
                                             <option value="">Choose Category</option>
                                         </select>
-                                        <input type="hidden" name="id_category">
+                                        {{-- <input type="hidden" name="id_category"> --}}
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -214,15 +214,14 @@
                         $(".id_category").html(resp.data)                        
                     }
                     if (!empty(selected)) {
-                        selected = selected.split(",")
-                        $(".id_category").val( selected).trigger("change")
+                        $(".id_category").val(selected).trigger("change")
                     }
                 })
             } 
 
-            $(".id_category").change(function () { 
-                $("[name=id_category]").val($(this).val())
-            })
+            // $(".id_category").change(function () { 
+            //     $("[name=id_category]").val($(this).val())
+            // })
         </script>
     </x-slot>
 
