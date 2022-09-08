@@ -9,7 +9,7 @@
     </x-slot>
 
     <x-slot name="buttons">
-        <a href="{{ url("admin/article/form") }}" class="btn btn-primary btn-sm btn-right btn-tambah" >
+        <a href="{{ url('admin/article/form') }}" class="btn btn-primary btn-sm btn-right btn-tambah">
             <i data-feather="plus"></i> Add Article
         </a>
     </x-slot>
@@ -19,12 +19,13 @@
             <div class="card">
                 <div class="card-content">
                     <div class="card-body" style="overflow: scroll">
-                        <table class='table table-striped' id="ArticleTable" urlAjax="{{ url("admin/article") }}">
+                        <table class='table table-striped' id="ArticleTable" urlAjax="{{ url('admin/article') }}">
                             <thead>
                                 <tr>
                                     <th>Kode</th>
                                     <th>Title</th>
-                                    <th>Posted By</th>
+                                    <th>Penulis</th>
+                                    <th>Kategori</th>
                                     <th style="width: 10%">Action</th>
                                 </tr>
                             </thead>
@@ -43,7 +44,7 @@
 
         <script>
             $(function() {
-                initDatatable("#ArticleTable" , 
+                initDatatable("#ArticleTable",
                     [{ // mengambil & menampilkan kolom sesuai tabel database
                             data: 'kode',
                             name: 'Kode'
@@ -53,13 +54,17 @@
                             name: 'Title'
                         },
                         {
-                            data: 'posted_by',
-                            name: 'posted_by'
+                            data: 'user.name',
+                            name: 'user.name'
+                        },
+                        {
+                            data: 'category.nama',
+                            name: 'category.nama'
                         },
                         {
                             data: 'action',
                             name: 'Action',
-                            orderable: false, 
+                            orderable: false,
                             searchable: false
                         }
                     ]
@@ -91,7 +96,7 @@
 
             $("#ArticleTable tbody").on("click", ".btn-update", function() {
                 let data = $(this).data();
-                location.href = "{{ url("admin/article/form?id=") }}" + data.id
+                location.href = "{{ url('admin/article/form?id=') }}" + data.id
             })
         </script>
     </x-slot>

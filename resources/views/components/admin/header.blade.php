@@ -9,7 +9,7 @@
             <li class="dropdown">
                 <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                     <div class="avatar me-1">
-                        <img src="{{ !empty(Auth::user()->photo) ? Url(Auth::user()->photo) : asset("assets_admin/assets/images/avatar/avatar-s-1.png") }}" alt="" srcset="">
+                        <img src="{{ !empty(Auth::user()->photo) ? Url(Auth::user()->photo) : asset("person-icon.png") }}" alt="" srcset="">
                     </div>
                     <div class="d-none d-md-block d-lg-inline-block">{{ Auth::user()->name }}</div>
                 </a>

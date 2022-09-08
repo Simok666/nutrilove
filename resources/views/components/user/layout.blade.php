@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="user_assets/img/favicon.png" rel="icon">
-    <link href="user_assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('user_assets/img/favicon.png')}}" rel="icon">
+    <link href="{{ asset('user_assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link
@@ -19,18 +19,18 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="user_assets/vendor/aos/aos.css" rel="stylesheet">
-    <link href="user_assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="user_assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="user_assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="user_assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-    <link href="user_assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-    <link href="user_assets/css/themify-icons.css" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/aos/aos.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/bootstrap-icons/bootstrap-icons.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/boxicons/css/boxicons.min.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/glightbox/css/glightbox.min.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/vendor/swiper/swiper-bundle.min.css")}}" rel="stylesheet">
+    <link href="{{ asset("user_assets/css/themify-icons.css")}}" rel="stylesheet">
 
     <link rel="stylesheet" href="{{ asset('admin_assets/plugins/toastr/toastr.min.css') }}">
 
     <!-- Template Main CSS File -->
-    <link href="user_assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('user_assets/css/style.css')}}" rel="stylesheet">
 
     <!-- =======================================================
   * Template Name: Ninestars - v4.8.0
@@ -100,16 +100,16 @@
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="user_assets/vendor/aos/aos.js"></script>
-    <script src="user_assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="user_assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="user_assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-    <script src="user_assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="user_assets/vendor/php-email-form/validate.js"></script>
+    <script src="{{ asset("user_assets/vendor/aos/aos.js")}}"></script>
+    <script src="{{ asset("user_assets/vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+    <script src="{{ asset("user_assets/vendor/glightbox/js/glightbox.min.js")}}"></script>
+    <script src="{{ asset("user_assets/vendor/isotope-layout/isotope.pkgd.min.js")}}"></script>
+    <script src="{{ asset("user_assets/vendor/swiper/swiper-bundle.min.js")}}"></script>
+    <script src="{{ asset("user_assets/vendor/php-email-form/validate.js")}}"></script>
 
 
     <!-- Template Main JS File -->
-    <script src="user_assets/js/main.js"></script>
+    <script src="{{ asset("user_assets/js/main.js")}}"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="{{ asset('admin_assets/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
