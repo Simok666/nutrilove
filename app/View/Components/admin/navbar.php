@@ -25,13 +25,13 @@ class navbar extends Component
     {
         $menus = [
             "Dashboard" => [
-                "url"   => "/admin",
+                "url"   => "/admin/dashboard",
                 "icon"   => "home"
             ],
-            "Admin"     => [
+            /* "Admin"     => [
                 "url"   => "/admin/admin",
                 "icon"  => "users"
-            ],
+            ], */
             "User"      => [
                 "url"   => "/admin/users",
                 "icon"  => "user"

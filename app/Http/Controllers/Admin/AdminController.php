@@ -161,5 +161,13 @@ class AdminController extends Controller
         
         return $resutl;
     }
+
+    public function dashboard(Request $request)
+    {
+        $countArticle = DB::table('articles')->count();
+        $countViewers = 10;
+        $countAdmin = DB::table("users")->count();
+        return view("admin.dashboard", compact('countArticle', 'countViewers', 'countAdmin'));
+    }
     
 }

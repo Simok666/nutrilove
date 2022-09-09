@@ -19,24 +19,26 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        $guards = empty($guards) ? [null] : $guards;
+        // $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                /** @var User $user */
-                $user = Auth::guard($guard);
+        /*         foreach ($guards as $guard) { */
 
-                // to admin dashboard
-                if($user->hasRole('admin')) {
-                    return redirect(route('index'));
-                }
+            // debug(auth()->check());
+        if (Auth::check()) {
+            /** @var User $user */
+            $user = Auth::user();
 
-                // to user dashboard
-                else if($user->hasRole('user')) {
-                    return redirect(route('user.index'));
-                }
+            // to admin dashboard
+            if ($user->hasRole('admin')) {
+                return redirect(Url("admin/dashboard"));
+            }
+
+            // to user dashboard
+            else if ($user->hasRole('user')) {
+                return redirect(route('user.index'));
             }
         }
+        /* } */
 
         return $next($request);
     }
