@@ -33,6 +33,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('admin.index');
     Route::get('/content', [AdminController::class, 'ajaxContent'])->name('admin.content');
 
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::post('/showtable/{table}', [AdminController::class, 'showtables'])->name('tables');
     Route::post('/save/{table}', [AdminController::class, 'save']);
     Route::post('/delete/{table}', [AdminController::class, 'delete']);
@@ -65,9 +66,7 @@ Route::get('/aboutus', function () {
     return view('user.aboutus');
 })->name('users.aboutus');
 
-Route::get('/articles', function () {
-    return view('user.blog');
-})->name('users.blogs');
+Route::get('/articles', [FrontendController::class, "listArticles"])->name('users.blogs');
 
 Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgizi');
 Route::post('/cekgizi', [FrontendController::class, "cekgizi"]);
