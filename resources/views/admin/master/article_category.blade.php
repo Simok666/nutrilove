@@ -18,6 +18,13 @@
                     <div class="form-group">
                         <input type="text" name="nama" required placeholder="Nama Kategory" class="form-control">
                     </div>
+                    <label>Tampilkan Di Navbar User</label>
+                    <div class="form-group">
+                        <select name="is_show_navbar" class="form-control select2">
+                            <option value="0" selected>Tidak</option>
+                            <option value="1">Ya</option>
+                        </select>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -57,6 +64,13 @@
                     <label>Nama</label>
                     <div class="form-group">
                         <input type="text" name="nama" required placeholder="Nama Kategory" class="form-control">
+                    </div>
+                    <label>Tampilkan Di Navbar User</label>
+                    <div class="form-group">
+                        <select name="is_show_navbar" class="form-control select2">
+                            <option value="0">Tidak</option>
+                            <option value="1">Ya</option>
+                        </select>
                     </div>
                 </form>
             </div>

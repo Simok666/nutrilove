@@ -1,8 +1,9 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\user;
 
 use Illuminate\View\Component;
+use App\Models\ArticleCategory;
 
 class header extends Component
 {
@@ -23,6 +24,7 @@ class header extends Component
      */
     public function render()
     {
-        return view('components.user.header');
+        $category = ArticleCategory::where("is_show_navbar", true)->get();
+        return view('components.user.header', compact("category"));
     }
 }

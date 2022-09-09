@@ -3,36 +3,24 @@
       <div class="container d-flex align-items-center justify-content-between">
 
           <div class="logo">
-              <h1 class="text-light"><a href="index.html"><span>Ninestars</span></a></h1>
+              {{-- <h1 class="text-light"><a href="index.html"><span>Ninestars</span></a></h1> --}}
               <!-- Uncomment below if you prefer to use an image logo -->
-              <!-- <a href="index.html"><img src="user_assets/img/logo.png" alt="" class="img-fluid"></a>-->
+              <a href="index.html"><img src="https://nutrilove.id/wp-content/uploads/2022/04/Logo3.png" alt="" class="img-fluid"></a>
           </div>
 
           <nav id="navbar" class="navbar">
               <ul>
                   <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                  <li><a class="nav-link scrollto" href="about-us.html">About Us</a></li>
-                  <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                  <li><a class="nav-link scrollto" href="{{ Url("cekgizi") }}">Cek Gizi</a></li>
-                  <li><a class="nav-link scrollto" href="articles.html">Articles</a></li>
-                  {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                  <li><a class="nav-link scrollto" href="{{ Url("aboutus") }}">About Us</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("cekgizi") }}">Cek Status Gizi</a></li>
+                  {{-- <li><a class="nav-link scrollto" href="{{ Url("articles") }}">Articles</a></li> --}}
+                  <li class="dropdown"><a href="#"><span>Article</span> <i class="bi bi-chevron-down"></i></a>
                       <ul>
-                          <li><a href="#">Drop Down 1</a></li>
-                          <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                      class="bi bi-chevron-right"></i></a>
-                              <ul>
-                                  <li><a href="#">Deep Drop Down 1</a></li>
-                                  <li><a href="#">Deep Drop Down 2</a></li>
-                                  <li><a href="#">Deep Drop Down 3</a></li>
-                                  <li><a href="#">Deep Drop Down 4</a></li>
-                                  <li><a href="#">Deep Drop Down 5</a></li>
-                              </ul>
-                          </li>
-                          <li><a href="#">Drop Down 2</a></li>
-                          <li><a href="#">Drop Down 3</a></li>
-                          <li><a href="#">Drop Down 4</a></li>
+                            @foreach ($category as $item)
+                                <li><a href="{{ Url("articles/category/". $item->kode) }}">{{ $item->nama }}</a></li>
+                            @endforeach
                       </ul>
-                  </li> --}}
+                  </li>
                   <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle"></i>

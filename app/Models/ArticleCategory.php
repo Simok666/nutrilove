@@ -15,9 +15,15 @@ class ArticleCategory extends Model
      */
     protected $fillable = [
         "kode",
-        "nama"
+        "nama",
+        "is_show_navbar"
     ];
 
     public $timestamps = true;
     use HasFactory;
+
+    function articles()
+    {
+        return $this->hasMany(\App\Models\Articles::class, 'id_category', 'id');
+    }
 }
