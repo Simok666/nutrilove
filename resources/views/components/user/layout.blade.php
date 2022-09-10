@@ -91,6 +91,11 @@
             @endisset
         @endif
 
+        @if (Route::is('users.contact'))
+            @isset($title)
+            @endisset
+        @endif
+        
         {{ $slot }}
 
     </main><!-- End #main -->
@@ -109,7 +114,7 @@
     <script src="{{ asset("user_assets/vendor/glightbox/js/glightbox.min.js")}}"></script>
     <script src="{{ asset("user_assets/vendor/isotope-layout/isotope.pkgd.min.js")}}"></script>
     <script src="{{ asset("user_assets/vendor/swiper/swiper-bundle.min.js")}}"></script>
-    <script src="{{ asset("user_assets/vendor/php-email-form/validate.js")}}"></script>
+    {{-- <script src="{{ asset("user_assets/vendor/php-email-form/validate.js")}}"></script> --}}
 
 
     <!-- Template Main JS File -->

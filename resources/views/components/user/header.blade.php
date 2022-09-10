@@ -10,8 +10,8 @@
 
           <nav id="navbar" class="navbar">
               <ul>
-                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                  <li><a class="nav-link scrollto" href="{{ Url("aboutus") }}">About Us</a></li>
+                  <li><a class="nav-link scrollto active" href={{ Url("/") }}>Home</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("about") }}">About Us</a></li>
                   <li><a class="nav-link scrollto" href="{{ Url("cekgizi") }}">Cek Status Gizi</a></li>
                   {{-- <li><a class="nav-link scrollto" href="{{ Url("articles") }}">Articles</a></li> --}}
                   <li class="dropdown"><a href="#"><span>Article</span> <i class="bi bi-chevron-down"></i></a>
@@ -21,7 +21,7 @@
                             @endforeach
                       </ul>
                   </li>
-                  <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("contact") }}">Contact</a></li>
               </ul>
               <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
