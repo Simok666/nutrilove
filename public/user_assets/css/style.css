@@ -368,7 +368,7 @@ h6,
   font-size: 48px;
   font-weight: 700;
   line-height: 56px;
-  color: #4e4039;
+  color: #3c4a4c;
 }
 
 #hero h2 {
@@ -489,7 +489,7 @@ section {
   padding-bottom: 0;
   line-height: 1px;
   margin-bottom: 15px;
-  color: #c2b7b1;
+  color: var(--default);
 }
 
 .section-title p {
@@ -498,7 +498,7 @@ section {
   position: relative;
   font-size: 32px;
   font-weight: 700;
-  color: #4e4039;
+  color: #3c4a4c;
 }
 
 .section-title p::after {
@@ -566,20 +566,20 @@ section {
 .about h3 {
   font-weight: 700;
   font-size: 34px;
-  color: #4e4039;
+  color: #3c4a4c;
 }
 
 .about h4 {
   font-size: 20px;
   font-weight: 700;
   margin-top: 5px;
-  color: #7a6960;
+  color: #587b80;
 }
 
 .about i {
   font-size: 48px;
   margin-top: 15px;
-  color: #f39e7a;
+  color: #aab9f7;
 }
 
 .about p {
@@ -4899,7 +4899,7 @@ sup,
 sub,
 u,
 del {
-  color: #1f2b7b;
+  color: var(--default);
 }
 .typography h1,
 .typography h2,
