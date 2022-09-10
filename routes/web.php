@@ -62,7 +62,7 @@ Route::get('/index', function () {
     return view('user.index');
 })->name('user.index');
 
-Route::get('/aboutus', function () {
+Route::get('/about', function () {
     return view('user.aboutus');
 })->name('users.aboutus');
 
