@@ -10,11 +10,11 @@
 
           <nav id="navbar" class="navbar">
               <ul>
-                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                  <li><a class="nav-link scrollto" href="about-us.html">About Us</a></li>
+                  <li><a class="nav-link scrollto active" href="{{ Url("/") }}">Home</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("about") }}">About Us</a></li>
                   <li><a class="nav-link scrollto" href="#services">Services</a></li>
                   <li><a class="nav-link scrollto" href="{{ Url("cekgizi") }}">Cek Gizi</a></li>
-                  <li><a class="nav-link scrollto" href="articles.html">Articles</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("articles") }}">Articles</a></li>
                   {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                       <ul>
                           <li><a href="#">Drop Down 1</a></li>

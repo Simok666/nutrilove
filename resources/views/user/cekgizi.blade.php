@@ -56,7 +56,7 @@
                         <div class="col-md-2">
                         </div>
                         <div class="col text-center pt-10">
-                            <button type="submit" class="btn btn-outline-primary text-center"><b>CEK STATUS GIZI
+                            <button type="submit" class="btn btn-outline-info text-center gizi-button"><b style="color:#f0e9ff;">CEK STATUS GIZI
                                     ANDA</b></button>
                         </div>
                     </form>
