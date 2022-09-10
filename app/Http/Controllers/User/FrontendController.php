@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\SettingGizi;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RiwayatCekGizi;
+use App\Models\Faq;
 use Illuminate\Support\Facades\Redirect;
+
 
 class FrontendController extends Controller
 {
@@ -101,4 +103,24 @@ class FrontendController extends Controller
         }
         return $result;
     }
+    public function faq(Request $request){
+        if ($request->ajax()) {
+            $this->validate($request,[
+                'name' => 'required',
+                'email' => 'required',
+                'subject' => 'required',
+                'message' => 'required',
+            ]);
+    
+            Faq::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message
+    
+            ]);
+        }
+    
+        return response()->json(['success' => "Berhasil kirim pertanyaan"]);
+    }   
 }
