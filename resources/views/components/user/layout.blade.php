@@ -95,6 +95,11 @@
             @isset($title)
             @endisset
         @endif
+
+        @if (Route::is('userslist.faq'))
+            @isset($title)
+            @endisset
+        @endif
         
         {{ $slot }}
 

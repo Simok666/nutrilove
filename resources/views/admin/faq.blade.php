@@ -84,7 +84,7 @@
                     cancelButtonText: 'Batal',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        ajaxData("/delete/content", {
+                        ajaxData("/delete/faq", {
                             "id": data.id
                         }, function(resp) {
                             toastrshow("success", "Data berhasil dihapus", "Success");

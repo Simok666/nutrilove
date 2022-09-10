@@ -78,6 +78,7 @@ Route::get('/contact', function () {
 
 Route::get('/articles', [FrontendController::class, "listArticles"])->name('users.blogs');
 
+Route::get('/faq', [FrontendController::class, "faqIndex"])->name('userslist.faq');
 Route::post('/faq', [FrontendController::class, "faq"])->name('users.faq');
 
 Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgizi');

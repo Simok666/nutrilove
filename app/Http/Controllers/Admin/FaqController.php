@@ -77,31 +77,6 @@ class FaqController extends Controller
             $data['file'] = Storage::disk('public')->put($imageName, base64_decode($image));
             $data['file'] = url('storage/'.$imageName);
         }
-
-        // $dom=new \DOMDocument();
-        // libxml_use_internal_errors(true);
-        // $dom->loadHTML($request->message,LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NOIMPLIED);
-        // libxml_clear_errors();
-        // $images=$dom->getElementsByTagName('img');
-        // foreach($images as $k => $img){
-        //     $src=$img->getAttribute('src');
-        //     if(preg_match('/data:image/',$src)){
-        //         $dataImg = $img->getAttribute('src');
-        //         list($type, $dataImg) = explode(';', $dataImg);
-        //         list(, $dataImg)      = explode(',', $dataImg);
-        //         $dataImg = base64_decode($dataImg);
-
-        //         $image_name = "/uploads/img/artikel/". Str::random(9).time().$k.'.png';
-
-        //         $dataImg = Storage::disk('public')->put($image_name, $dataImg);
-        //         $image_name = url('storage'.$image_name);
-            
-        //         $img->removeAttribute('src');
-        //         $img->setAttribute('src', $image_name);
-        //     }
-        // }
-
-        // $data["message"] = $dom->saveHTML();
         
         $data = Faq::updateOrCreate(
             ['id' => $request->id],
