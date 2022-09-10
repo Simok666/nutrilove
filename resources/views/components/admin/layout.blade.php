@@ -47,6 +47,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <h3>{{ $title }}</h3>
+                                @isset($message)
+                                    <p class="text-subtitle text-muted">{{ $message }}</p>
+                                @endisset
                             </div>
                             @isset( $buttons )
                             <div class="col-md-6" style="text-align-last: right;">

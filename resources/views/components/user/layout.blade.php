@@ -48,7 +48,8 @@
 
 <body>
 
-    <x-user.header />
+    <x-user.header>
+    </x-user.header>
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
 
@@ -94,7 +95,8 @@
 
     </main><!-- End #main -->
 
-    <x-user.footer />
+    <x-user.footer>
+    </x-user.footer>
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
