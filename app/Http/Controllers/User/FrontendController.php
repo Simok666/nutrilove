@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RiwayatCekGizi;
 use App\Models\Faq;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\Articles;
+use App\Models\ArticleCategory;
 
 
 class FrontendController extends Controller
@@ -18,13 +20,13 @@ class FrontendController extends Controller
         if ($request->ajax()) {
             $user = Auth::user();
             
-            if (empty($user)) {
-                return [
-                    "IsError"   => true,
-                    "Message"   => "Silahkan login dahulu",
-                    "Type"      => "Login"
-                ];
-            }
+            // if (empty($user)) {
+            //     return [
+            //         "IsError"   => true,
+            //         "Message"   => "Silahkan login dahulu",
+            //         "Type"      => "Login"
+            //     ];
+            // }
 
             $result = $this->hitungIMT($request->bb, $request->tb);
 
@@ -34,7 +36,7 @@ class FrontendController extends Controller
                     "Message"   => "Data undefined, tolong masukan data dengan benar"
                 ];
             } else {
-                $data = array_merge($request->all(), ["user_id" => $user->id]);
+                $data = array_merge($request->all(), ["user_id" => empty($user->id) ? 0: $user->id ]);
                 $insertData = RiwayatCekGizi::create($data);
                 if ($insertData) {
                     $insertData["idEncript"] = $this->EncriptDecript($insertData["id"]);
@@ -60,7 +62,6 @@ class FrontendController extends Controller
     {
         $id = $this->EncriptDecript($id, "de");
         $data = RiwayatCekGizi::where("id",$id)->get();
-
         if ($data->count() < 1) {
             Redirect::back();
         }
@@ -73,18 +74,25 @@ class FrontendController extends Controller
         return view('user.cekgiziDetail', compact('data', 'gizi'));
     }
 
+    public function listArticles(Request $request)
+    {
+        $categori = ArticleCategory::all();
+        $artikel = Articles::latest()->paginate(10);
+        $artikelterkait = Articles::latest()->limit(4)->get();
+        return view('user.blog', compact('categori', 'artikel', 'artikelterkait'));
+    }
+
     private function EncriptDecript(String $string, String $type = "")
     {
-        $type = ($type === "de" ? "openssl_decrypt" : "openssl_encrypt");
-        $string = ($type === "de" ? urldecode($string) : $string);
-        $data = $type(
+        $func = ($type === "de" ? "openssl_decrypt" : "openssl_encrypt");
+        $data = $func(
             $string,
             "AES-256-CBC",
             "S25UOiwpllZETMjDllYidaw2DPm4234X",
             0,
             "S25UOiwpllZETMjD"
         );
-        $data = ($type === "de" ? $data : urldecode($data));
+        $data = ($type === "de" ? $data : urlencode($data));
         return $data;
     }
 

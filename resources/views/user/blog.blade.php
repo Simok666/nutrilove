@@ -1,141 +1,57 @@
 <x-user.layout title="Blog">
-    
+    <x-slot name="styles">
+        <style>
+            .descritption_content {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+
+                line-clamp: 2;
+                -webkit-box-orient: vertical;
+            }
+        </style>
+    </x-slot>
+
     <!--================Blog Area =================-->
     <section class="blog_area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="user_assets/img/blog/single_blog_1.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-articles.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="user_assets/img/blog/single_blog_2.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-articles.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="user_assets/img/blog/single_blog_3.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-articles.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="user_assets/img/blog/single_blog_4.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-articles.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="user_assets/img/blog/single_blog_5.png" alt="">
-                                <a href="#" class="blog_item_date">
-                                    <h3>15</h3>
-                                    <p>Jan</p>
-                                </a>
-                            </div>
-
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="single-articles.html">
-                                    <h2>Google inks pact for new 35-storey office</h2>
-                                </a>
-                                <p>That dominion stars lights dominion divide years for fourth have don't stars is that
-                                    he earth it first without heaven in place seed it second morning saying.</p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i> Travel, Lifestyle</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-
-                        <nav class="blog-pagination justify-content-center d-flex">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Previous">
-                                        <i class="ti-angle-left"></i>
+                        @foreach ($artikel as $item)
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    <a href="{{ Url('articles/show/' . $item->kode) }}">
+                                        <img class="card-img rounded-0" style="max-height: 250px; object-fit: cover"
+                                            src="{{ empty($item->file) ? Url('no-image.png') : $item->file }}"
+                                            alt="">
+                                        <div class="blog_item_date">
+                                            <h3>{{ date('d', strtotime($item->created_at)) }}</h3>
+                                            <p>{{ date('M', strtotime($item->created_at)) }}</p>
+                                        </div>
                                     </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link" aria-label="Next">
-                                        <i class="ti-angle-right"></i>
+                                </div>
+
+                                <div class="blog_details">
+                                    {{-- <a class="d-inline-block" href="single-articles.html"> --}}
+                                    <a class="d-inline-block" href="{{ Url('articles/show/' . $item->kode) }}">
+                                        <h2>{{ $item->title }}</h2>
                                     </a>
-                                </li>
-                            </ul>
-                        </nav>
+                                    <p class="descritption_content"><?= strip_tags($item->desc_content) ?></p>
+                                    <ul class="blog-info-link">
+                                        <li>By :<a href="{{ Url('articles/author/' . $item->user->id) }}"><i
+                                                    class="fa fa-user"></i> {{ $item->user->name }}</a>
+                                        <li>Kategori :<a
+                                                href="{{ Url('articles/category/' . $item->category->kode) }}"><i
+                                                    class="fa fa-user"></i>
+                                                {{ $item->category->nama }} </a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                    </ul>
+                                </div>
+                            </article>
+                        @endforeach
+                        {!! $artikel->links("elements.custom-pagenation") !!}
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -160,163 +76,34 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
+                                @foreach ($categori as $item)
+                                    <li>
+                                        <a href="{{ Url('articles/category/' . $item->kode) }}" class="d-flex">
+                                            <p>{{ $item->nama }}</p>
+                                            <p>&nbsp;({{ (int) $item->articles()->count() }})</p>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </aside>
 
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Recent Post</h3>
-                            <div class="media post_item">
-                                <img src="user_assets/img/post/post_1.png" alt="post">
-                                <div class="media-body">
+                            @foreach ($artikelterkait as $item)
+                                <div class="media post_item">
                                     <a href="single-articles.html">
-                                        <h3>From life was you fish...</h3>
+                                        <img height="80" width="80" style="object-fit: cover"
+                                            src="{{ empty($item->file) ? Url('no-image.png') : $item->file }}"
+                                            alt="post">
                                     </a>
-                                    <p>January 12, 2019</p>
+                                    <div class="media-body">
+                                        <a href="single-articles.html">
+                                            <h3>From life was you fish...</h3>
+                                        </a>
+                                        <p>{{ date("d F Y", strtotime($item->created_at)) }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="user_assets/img/post/post_2.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-articles.html">
-                                        <h3>The Amazing Hubble</h3>
-                                    </a>
-                                    <p>02 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="user_assets/img/post/post_3.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-articles.html">
-                                        <h3>Astronomy Or Astrology</h3>
-                                    </a>
-                                    <p>03 Hours ago</p>
-                                </div>
-                            </div>
-                            <div class="media post_item">
-                                <img src="user_assets/img/post/post_4.png" alt="post">
-                                <div class="media-body">
-                                    <a href="single-articles.html">
-                                        <h3>Asteroids telescope</h3>
-                                    </a>
-                                    <p>01 Hours ago</p>
-                                </div>
-                            </div>
-                        </aside>
-                        <aside class="single_sidebar_widget tag_cloud_widget">
-                            <h4 class="widget_title">Tag Clouds</h4>
-                            <ul class="list">
-                                <li>
-                                    <a href="#">project</a>
-                                </li>
-                                <li>
-                                    <a href="#">love</a>
-                                </li>
-                                <li>
-                                    <a href="#">technology</a>
-                                </li>
-                                <li>
-                                    <a href="#">travel</a>
-                                </li>
-                                <li>
-                                    <a href="#">restaurant</a>
-                                </li>
-                                <li>
-                                    <a href="#">life style</a>
-                                </li>
-                                <li>
-                                    <a href="#">design</a>
-                                </li>
-                                <li>
-                                    <a href="#">illustration</a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
-                        <aside class="single_sidebar_widget instagram_feeds">
-                            <h4 class="widget_title">Instagram Feeds</h4>
-                            <ul class="instagram_row flex-wrap">
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_5.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_6.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_7.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_8.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_9.png" alt="">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img class="img-fluid" src="user_assets/img/post/post_10.png" alt="">
-                                    </a>
-                                </li>
-                            </ul>
-                        </aside>
-
-
-                        <aside class="single_sidebar_widget newsletter_widget">
-                            <h4 class="widget_title">Newsletter</h4>
-
-                            <form action="#">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" onfocus="this.placeholder = ''"
-                                        onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
-                                </div>
-                                <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                    type="submit">Subscribe</button>
-                            </form>
+                            @endforeach
                         </aside>
                     </div>
                 </div>
