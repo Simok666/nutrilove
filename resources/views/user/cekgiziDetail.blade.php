@@ -1,14 +1,14 @@
 <x-user.layout title="Index">
-    <!-- ======= About Section ======= -->
+    <!-- ======= check gizi detail Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Hasil Status Gizi</h2>
                 <p>Status gizi yang kami cek berdasarkan informasi yang Anda berikan.<br>
             </div>
-            <div class="row justify-content-between">
+            <div class="row ">
                 <div class="col-lg-12 d-flex align-items-center justify-content-center ">
-                    <div class="col-md-7 pt-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="100">
+                    <div class="col-md-7  pt-4 aos-init aos-animate" data-aos="fade-left" data-aos-delay="100">
 
                         <b> {{ $data->nama }} </b><br>
                         Laki-laki berusia <b> {{ $data->usia }} tahun </b><br>
@@ -21,8 +21,16 @@
 
 
                     </div>
+
+                    <div class="col-md-6 col-lg-3 align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                        <p><br><b>Gizi Kurang, Obesitas, Kekurangan Vitamin dan Mineral Sering Terjadi pada Orang Dewasa</b><br></p>
+                        <img src="{{asset('user_assets/img/gizi/isipiringku1.png')}}" class="img-fluid"  style="max-width:100%; height:auto;" alt="">
+                    </div>
+                    
                 </div>
+                
             </div>
+            
         </div>
-    </section><!-- End About Section -->
+    </section><!-- check gizi detail end -->
 </x-user.layout>
