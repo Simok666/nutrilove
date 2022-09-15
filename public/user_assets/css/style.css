@@ -358,21 +358,41 @@ h6,
 #hero {
   width: 100%;
   height: 70vh;
-  background: var(--backgroundcolor);
+  position: relative;
+  background-size: cover;
+  background-position: 50% 50%;
+  /* background: var(--backgroundcolor); */
+  background-image: url("../img/gizi/health1.jpg");
   border-bottom: 2px solid #fcebe3;
   margin: 72px 0 -72px 0;
 }
 
+.overlay-hero{
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.65);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+}
+
 #hero h1 {
   margin: 0;
-  font-size: 48px;
+  font-size: 60px;
   font-weight: 700;
   line-height: 56px;
-  color: #3c4a4c;
+  text-align: center;
+  color: #f2f2f2;
 }
 
 #hero h2 {
-  color: #a08f86;
+  color: #f2f2f2;
+  text-align: center;
   margin: 15px 0 0 0;
   font-size: 24px;
 }
@@ -420,13 +440,13 @@ h6,
 
 @media (max-width: 768px) {
   #hero h1 {
-    font-size: 28px;
-    line-height: 36px;
+    font-size: 36px;
+    line-height: 42px;
   }
 
   #hero h2 {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 26px;
+    line-height: 32px;
   }
 
   #hero .hero-img img {

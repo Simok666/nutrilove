@@ -19,6 +19,8 @@ class CreateFaqTable extends Migration
             $table->string('email');
             $table->longText('subject');
             $table->longText('message');
+            $table->longText('answer')->nullable();
+            $table->longText('frequently')->nullable();
             $table->timestamps();
         });
     }
