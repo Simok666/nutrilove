@@ -20,9 +20,10 @@ use App\Http\Controllers\User\FrontendController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.index');
-});
+// Route::get('/', function () {
+//     return view('user.index');
+// });
+Route::get('/', [FrontendController::class, "feIndex"])->name('user.index');
 
 
 Route::get('/admin/blank', function () {
@@ -63,9 +64,8 @@ Route::middleware('auth', 'admin')->group(function () {
     route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
 });
 
-Route::get('/index', function () {
-    return view('user.index');
-})->name('user.index');
+
+Route::get('/index', [FrontendController::class, "feIndex"])->name('user.index');
 
 Route::get('/about', function () {
     return view('user.aboutus');

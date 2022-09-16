@@ -277,7 +277,7 @@ h6,
   right: 0;
   left: 0;
   bottom: 0;
-  background: rgba(78, 64, 57, 0.9);
+  background: rgb(57 75 78 / 90%);
   transition: 0.3s;
 }
 
@@ -731,7 +731,7 @@ section {
 
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-  color: #eb5d1e;
+  color: var(--default);
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -748,7 +748,7 @@ section {
 
 .portfolio .portfolio-wrap::before {
   content: "";
-  background: rgba(122, 105, 96, 0.6);
+  background: rgb(96 108 122 / 60%);
   position: absolute;
   left: 100%;
   right: 0;
@@ -776,7 +776,7 @@ section {
 }
 
 .portfolio .portfolio-wrap .portfolio-links a {
-  color: #eb5d1e;
+  color: var(--default);
   margin: 0 4px;
   line-height: 0;
   background-color: #fff;
@@ -796,7 +796,7 @@ section {
 }
 
 .portfolio .portfolio-wrap .portfolio-links a:hover {
-  background: #eb5d1e;
+  background: var(--default);
   color: #fff;
 }
 
@@ -1081,11 +1081,11 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #eb5d1e;
+  border: 1px solid var(--default);
 }
 
 .clients .clients-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #eb5d1e;
+  background-color: var(--default);
 }
 
 /*--------------------------------------------------------------
@@ -1119,14 +1119,14 @@ section {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #7a6960;
+  color: #60747a;
 }
 
 .contact .info p {
   padding: 0 0 10px 60px;
   margin-bottom: 20px;
   font-size: 14px;
-  color: #ab9d95;
+  color: #95a2ab;
 }
 
 .contact .info .email p {
@@ -7714,7 +7714,7 @@ form.search-box .search-form a {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #f39e7a;
+  color: var(--default);
   font-size: 18px;
   line-height: 1;
 }
