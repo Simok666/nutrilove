@@ -170,7 +170,7 @@ const ajaxData = (url, data, successfunc, errorfunc, beforefunc) => {
 					$.ajax(this);
 				}
 			} else {
-				swal.fire("Gagal", "Ops.! Something wrong.", "error");
+				toastrshow("warning", "Ops.! Something wrong.", "Peringatan");
 				if (!empty(errorfunc)) {
 					errorfunc();
 				}

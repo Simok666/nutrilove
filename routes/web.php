@@ -77,6 +77,11 @@ Route::get('/contact', function () {
 
 
 Route::get('/articles', [FrontendController::class, "listArticles"])->name('users.blogs');
+Route::get('/articles/category/{category}', [FrontendController::class, "category"]);
+Route::get('/articles/author/{author}', [FrontendController::class, "author"]);
+Route::get('/articles/show/{kode}', [FrontendController::class, "show"]);
+
+Route::post('/article/reaction', [FrontendController::class, "reaction"]);
 
 Route::get('/faq', [FrontendController::class, "faqIndex"])->name('userslist.faq');
 Route::post('/faq', [FrontendController::class, "faq"])->name('users.faq');

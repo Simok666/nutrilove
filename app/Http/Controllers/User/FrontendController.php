@@ -11,6 +11,8 @@ use App\Models\Faq;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Articles;
 use App\Models\ArticleCategory;
+use App\Models\Reaction;
+use Illuminate\Support\Facades\DB;
 
 
 class FrontendController extends Controller
@@ -19,7 +21,7 @@ class FrontendController extends Controller
     {
         if ($request->ajax()) {
             $user = Auth::user();
-            
+
             // if (empty($user)) {
             //     return [
             //         "IsError"   => true,
@@ -36,12 +38,13 @@ class FrontendController extends Controller
                     "Message"   => "Data undefined, tolong masukan data dengan benar"
                 ];
             } else {
-                $data = array_merge($request->all(), ["user_id" => empty($user->id) ? 0: $user->id ]);
+                $randomString = time().$this->randomString(15);
+                $data = array_merge($request->all(), ["user_id" => empty($user->id) ? 0 : $user->id, "random_string" => $randomString]);
                 $insertData = RiwayatCekGizi::create($data);
                 if ($insertData) {
-                    $insertData["idEncript"] = $this->EncriptDecript($insertData["id"]);
+                    $insertData["idEncript"] = $randomString;
                     $result = [
-                        "IsError"   => false ,
+                        "IsError"   => false,
                         "Message"   => "Data Berhasil disimpan",
                         "Data"      => $insertData
                     ];
@@ -60,15 +63,14 @@ class FrontendController extends Controller
 
     public function cekgiziDetail(Request $request, $id)
     {
-        $id = $this->EncriptDecript($id, "de");
-        $data = RiwayatCekGizi::where("id",$id)->get();
+        $data = RiwayatCekGizi::where("random_string", $id)->get();
         if ($data->count() < 1) {
-            Redirect::back();
+            return Redirect::to("/");
         }
         $data = $data->first();
         $gizi = $this->hitungIMT($data->bb, $data->tb);
         if (empty($gizi)) {
-            Redirect::back();
+            Redirect::to("/");
         }
 
         return view('user.cekgiziDetail', compact('data', 'gizi'));
@@ -82,23 +84,103 @@ class FrontendController extends Controller
         return view('user.blog', compact('categori', 'artikel', 'artikelterkait'));
     }
 
-    private function EncriptDecript(String $string, String $type = "")
+    public function category(Request $request, $kode)
     {
-        $func = ($type === "de" ? "openssl_decrypt" : "openssl_encrypt");
-        $data = $func(
-            $string,
-            "AES-256-CBC",
-            "S25UOiwpllZETMjDllYidaw2DPm4234X",
-            0,
-            "S25UOiwpllZETMjD"
+        $categori = ArticleCategory::all();
+        $this->code = $kode;
+        $artikel = Articles::latest()->whereHas('category', function ($q) {
+            $q->where('kode', $this->code);
+        })->paginate(10);
+        $artikelterkait = Articles::latest()->limit(4)->get();
+        return view('user.blog', compact('categori', 'artikel', 'artikelterkait'));
+    }
+
+    public function author(Request $request, $kode)
+    {
+        $categori = ArticleCategory::all();
+        $artikel = Articles::latest()->where('user_id', $kode)->paginate(10);
+        $artikelterkait = Articles::latest()->limit(4)->get();
+        return view('user.blog', compact('categori', 'artikel', 'artikelterkait'));
+    }
+
+    public function show(Request $request, $kode)
+    {
+        $categori = ArticleCategory::all();
+        $artikel = Articles::latest()->where("kode", $kode)->first();
+        if (empty($artikel)) {
+            return Redirect::to("/");
+        }
+
+        $listReaction = $this->getReaction($artikel->id);
+        $artikel->emoticon = $this->reactionHtml($listReaction);
+
+        $artikelterkait = Articles::latest()->limit(4)->get();
+        return view('user.detail_blog', compact('categori', 'artikel', 'artikelterkait'));
+    }
+
+    public function reaction(Request $request)
+    {
+        $filter["article_id"] = $request->article_id;
+        $result = [
+            "IsError" => false,
+            "Message"   => "Aman euy"
+        ];
+
+        $user = Auth::user();
+        if (!empty($user->id)) {
+            $filter["user_id"] = $user->id;
+        } else {
+            $filter["session_id"] = session()->getId();
+        }
+
+        $data = array_merge($filter, ["reaction" => $request->reaction]);
+        $upsert = Reaction::updateOrCreate(
+            $filter,
+            $data
         );
-        $data = ($type === "de" ? $data : urlencode($data));
-        return $data;
+        if ($upsert) {
+            $listReaction = $this->getReaction($request->article_id);
+            $result["data"] = $this->reactionHtml($listReaction);
+        }
+        return $result;
+    }
+
+    public function getReaction($article_id)
+    {
+        return DB::table("reaction")->select(DB::raw('GROUP_CONCAT(distinct(reaction) SEPARATOR ",") AS reaction, count(id) as count'))->where("article_id", $article_id)->first();
+    }
+
+    public function reactionHtml($data)
+    {
+        $result = [];
+        if (empty($data->reaction)) {
+            return $result;
+        }
+
+        $reaction = explode(",", $data->reaction);
+        foreach ($reaction as $item) {
+            $result["emoticon"][] = '<span class="like-btn-' . $item . '"></span>'; 
+        }
+        $result["emoticon"] = implode("", $result["emoticon"]);
+        $result['count'] = $data->count ." Reaction";
+
+        return $result;
+    }
+
+    private function randomString($length = 10)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     private function hitungIMT($bb, $tb)
     {
-        $tb = $tb/100 * $tb/100;
+        $tb = $tb / 100 * $tb / 100;
         $total = $bb / $tb;
         $data = SettingGizi::orderBy('nilai_rumus', "desc")->get();
         $result = [];
@@ -111,28 +193,30 @@ class FrontendController extends Controller
         }
         return $result;
     }
-    public function faq(Request $request){
+    public function faq(Request $request)
+    {
         if ($request->ajax()) {
-            $this->validate($request,[
+            $this->validate($request, [
                 'name' => 'required',
                 'email' => 'required',
                 'subject' => 'required',
                 'message' => 'required',
             ]);
-    
+
             Faq::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'subject' => $request->subject,
                 'message' => $request->message
-    
+
             ]);
         }
-    
+
         return response()->json(['success' => "Berhasil kirim pertanyaan"]);
     }
-    public function faqIndex(){
-        $data['faq'] = Faq::select()->where('frequently','=','frequently')->get();
-        return view('user.faq',$data);
-    }   
+    public function faqIndex()
+    {
+        $data['faq'] = Faq::select()->where('frequently', '=', 'frequently')->get();
+        return view('user.faq', $data);
+    }
 }

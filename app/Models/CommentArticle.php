@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RiwayatCekGizi extends Model
+class CommentArticle extends Model
 {
-    protected $table = 'riwayat_cek_gizi';
+    protected $table = 'comment_article';
     /**
      * The attributes that are mass assignable.
      *
@@ -15,13 +15,8 @@ class RiwayatCekGizi extends Model
      */
     protected $fillable = [
         'user_id',
-        'nama',
-        'jenis_kelamin',
-        'usia',
-        'tb',
-        'bb',
-        'email',
-        'random_string'
+        'article_id',
+        'comment'
     ];
 
     public $timestamps = true;
