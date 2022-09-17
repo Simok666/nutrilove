@@ -8,6 +8,7 @@ use App\Models\SettingGizi;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RiwayatCekGizi;
 use App\Models\Faq;
+use App\Models\Content;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Articles;
 use App\Models\ArticleCategory;
@@ -214,9 +215,13 @@ class FrontendController extends Controller
 
         return response()->json(['success' => "Berhasil kirim pertanyaan"]);
     }
-    public function faqIndex()
-    {
-        $data['faq'] = Faq::select()->where('frequently', '=', 'frequently')->get();
-        return view('user.faq', $data);
+    public function faqIndex(){
+        $data['faq'] = Faq::select()->where('frequently','=','frequently')->get();
+        return view('user.faq',$data);
     }
+    public function feIndex(){
+        $data['content'] = Content::select()->where('kode','like','%instagram%')->get();
+        return view('user.index',$data);
+    }
+
 }
