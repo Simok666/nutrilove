@@ -44,6 +44,10 @@ class navbar extends Component
                 "url"   => "/admin/faq",
                 "icon"  => "file"
             ],
+            "Leaflet"   => [
+                "url"   => "/admin/leaflet",
+                "icon"  => "file"
+            ],
             "Article"   => [
                 "url"   => "#",
                 "icon"  => "file",

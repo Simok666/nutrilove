@@ -22,9 +22,9 @@
                 <p> Bersama kita cegah stunting. Eat Well, Life Healty, Good Body. </p>
                 
               </div>
-              <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                <i class="bx bx-user-plus"></i>
-                <h4>Tim Kami</h4>
+              <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                <i class="bx bxs-user-detail"></i>
+                <h4>Tim Kami :</h4>
                 <p>1. Nike Noviana Putri</p>
                 <p>2. Larissa Dian Gayatri</p>
                 <p>3. Bunga Putri Arindra</p>
@@ -32,7 +32,11 @@
                 <p>5. Dhiah Widyaningtyas Budi</p>
                 <p>6. Sigita Ardelia Fista</p>
                 <p>7. Bayu Puspita</p>
-                <p>Thanks to:</p>
+                
+              </div>
+              <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-user-plus"></i>
+              <h4>Thanks to :</h4>
                 <p>1. Bapak Bastinus Doddy, SKM., MM</p>
                 <p>2. Bapak Hasan Aroni, SKM., MPH</p>
                 <p>3. Bapak Sugeng Iwan Setyobudi, STP., M.Ke. </p>
@@ -93,49 +97,30 @@
       </div>
     </section><!-- End Services Section -->
 
-    <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container" data-aos="fade-up">
+    <!-- ======= F.A.Q Section ======= -->
+<section id="faq" class="faq section-bg">
+  <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Instagram</h2>
-          <p>Check out our beautifull instagram</p>
+    <div class="section-title">
+      <h2>F.A.Q</h2>
+      <p>Frequently Asked Questions</p>
+    </div>
+
+    <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+      @foreach($faq as $value)
+      <li>
+        <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$value->message}} <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+        <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+          <p>
+              {{$value->answer}}
+          </p>
         </div>
+      </li>
+      @endforeach
+    </ul>
 
-        <div class="row" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-12">
-            <ul id="portfolio-flters">
-              <li data-filter="*" class="filter-active">All</li>
-              <li data-filter=".filter-app">App</li>
-              <li data-filter=".filter-card">Card</li>
-              <li data-filter=".filter-web">Web</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-        
-          @foreach($content as $value)
-      
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-            <div class="portfolio-wrap">
-              <img src="{{$value->file}}" class="img-fluid" alt="">
-              <div class="portfolio-links">
-                <a href="{{$value->file}}" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bi bi-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bi bi-link"></i></a>
-              </div>
-              <div class="portfolio-info">
-                <h4>{{$value->title}}</h4>
-                <p>App</p>
-              </div>
-            </div>
-          </div>
-          @endforeach
-
-        </div>
-
-      </div>
-    </section><!-- End Portfolio Section -->
+  </div>
+</section><!-- End F.A.Q Section -->
 
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">

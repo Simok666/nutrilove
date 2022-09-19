@@ -78,6 +78,7 @@
     <script src="{{ asset('admin_assets/plugins/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('admin_assets/plugins/jquery.validate.min.js') }}"></script>
     <script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+    <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
     <script src="{{ asset('dashboard.js') }}"></script>
 
 

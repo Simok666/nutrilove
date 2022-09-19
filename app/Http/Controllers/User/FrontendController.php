@@ -132,11 +132,9 @@ class FrontendController extends Controller
     
         return response()->json(['success' => "Berhasil kirim pertanyaan"]);
     }
-    public function faqIndex(){
-        $data['faq'] = Faq::select()->where('frequently','=','frequently')->get();
-        return view('user.faq',$data);
-    }
+  
     public function feIndex(){
+        $data['faq'] = Faq::select()->where('frequently','=','frequently')->get();
         $data['content'] = Content::select()->where('kode','like','%instagram%')->get();
         return view('user.index',$data);
     }

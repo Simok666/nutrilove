@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\SettingGiziController;
 use App\Http\Controllers\Admin\ContentController;
 use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\LeafletController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\User\FrontendController;
 
@@ -52,6 +53,10 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('admin/faq/form', [FaqController::class, 'form'])->name('faq.form');
     Route::post('admin/faq/upsert', [FaqController::class, 'upsert'])->name('faq.upsert');
 
+    Route::get('/admin/leaflet', [LeafletController::class, 'index'])->name('leaflet');
+    Route::get('admin/leaflet/form', [LeafletController::class, 'form'])->name('leaflet.form');
+    Route::post('admin/leaflet/upsert', [LeafletController::class, 'upsert'])->name('leaflet.upsert');
+
     Route::get('/admin/article', [ArticleController::class, 'index'])->name('article');
     Route::get('admin/article/form', [ArticleController::class, 'form'])->name('article.form');
     Route::post('admin/article/upsert', [ArticleController::class, 'upsert'])->name('article.upsert');
@@ -78,7 +83,7 @@ Route::get('/contact', function () {
 
 Route::get('/articles', [FrontendController::class, "listArticles"])->name('users.blogs');
 
-Route::get('/faq', [FrontendController::class, "faqIndex"])->name('userslist.faq');
+
 Route::post('/faq', [FrontendController::class, "faq"])->name('users.faq');
 
 Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgizi');
