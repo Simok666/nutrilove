@@ -5,23 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RiwayatCekGizi extends Model
+class Reaction extends Model
 {
-    protected $table = 'riwayat_cek_gizi';
+    protected $table = 'reaction';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'user_id',
-        'nama',
-        'jenis_kelamin',
-        'usia',
-        'tb',
-        'bb',
-        'email',
-        'random_string'
+        'article_id',
+        'reaction',
+        'session_id',
+        'user_id'
     ];
 
     public $timestamps = true;

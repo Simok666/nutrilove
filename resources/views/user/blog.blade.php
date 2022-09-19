@@ -24,7 +24,7 @@
                                 <div class="blog_item_img">
                                     <a href="{{ Url('articles/show/' . $item->kode) }}">
                                         <img class="card-img rounded-0" style="max-height: 250px; object-fit: cover"
-                                            src="{{ empty($item->file) ? Url('no-image.png') : $item->file }}"
+                                            src="{{ empty($item->file) ? Url('no-image.png') : Url($item->file) }}"
                                             alt="">
                                         <div class="blog_item_date">
                                             <h3>{{ date('d', strtotime($item->created_at)) }}</h3>
@@ -57,7 +57,7 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            {{-- <form action="#">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control" placeholder='Search Keyword'
@@ -70,7 +70,7 @@
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
                                     type="submit">Search</button>
-                            </form>
+                            </form> --}}
                         </aside>
 
                         <aside class="single_sidebar_widget post_category_widget">
@@ -98,7 +98,7 @@
                                     </a>
                                     <div class="media-body">
                                         <a href="single-articles.html">
-                                            <h3>From life was you fish...</h3>
+                                            <h3 class="descritption_content">{{ $item->title }}</h3>
                                         </a>
                                         <p>{{ date("d F Y", strtotime($item->created_at)) }}</p>
                                     </div>
