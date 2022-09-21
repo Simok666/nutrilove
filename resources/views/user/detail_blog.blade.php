@@ -1,7 +1,6 @@
 <x-user.layout title="Index">
     <x-slot name="styles">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ Url('reaction/css/style.css') }}" />
         <!-- Css for reaction system -->
         <link rel="stylesheet" type="text/css" href="{{ Url('reaction/css/reaction.css') }}" />
 
@@ -30,7 +29,7 @@
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
                             <p class="excert">
-                                <?= /* $artikel->desc_content */" " ?>
+                                <?= $artikel->desc_content ?>
                             </p>
                         </div>
                     </div>

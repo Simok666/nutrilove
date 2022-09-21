@@ -68,18 +68,9 @@ class LeafletController extends Controller
         if (!empty($request->fileBase64)) {
             $file = $request->fileBase64;
             $extension = 'pdf';
-            $replace = substr($file, 0, strpos($file, ',') + 1);
-            $image = str_replace($replace, '', $file);
-            $image = str_replace(' ', '+', $image);
             $imageName = Str::random(10) . '.' . $extension;
-            
-            $request->validate([
-                $file => 'mimes:pdf|max:2048'
-            ]);
-
-            $data['file'] = Storage::disk('public')->put($imageName, base64_decode($image));
+            $data['file'] = Storage::disk('public')->put($imageName, base64_decode($file));
             $data['file'] = url('storage/'.$imageName);
-            
         }      
 
         $data = Leaflet::updateOrCreate(

@@ -83,7 +83,7 @@
                             "id": data.id
                         }, function(resp) {
                             toastrshow("success", "Data berhasil dihapus", "Success");
-                            ReloadDataTable("#ContentTable")
+                            ReloadDataTable("#LeafletTable")
                         })
                     }
                 })
@@ -91,7 +91,7 @@
 
             $("#LeafletTable tbody").on("click", ".btn-update", function() {
                 let data = $(this).data();
-                location.href = "{{ url("admin/content/form?id=") }}" + data.id
+                location.href = "{{ url("admin/leaflet/form?id=") }}" + data.id
             })
         </script>
     </x-slot>
