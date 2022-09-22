@@ -47,6 +47,10 @@
                             <option value="user">User</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>My Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
+                    </div>
                     <label>Password: </label>
                     <div class="form-group">
                         <input type="password" name="password" minlength="8" required placeholder="Password"
@@ -124,6 +128,10 @@
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>My Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
                     </div>
                 </form>
             </div>

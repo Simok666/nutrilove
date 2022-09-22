@@ -83,9 +83,7 @@
                                 <a href="{{ Url('articles/author/' .$artikel->user_id) }}">
                                     <h4>{{ $artikel->user->name }}</h4>
                                 </a>
-                                <p>Second divided from form fish beast made. Every of seas all gathered use saying
-                                    you're, he
-                                    our dominion twon Second divided from</p>
+                                <p>{{ $artikel->user->description }}</p>
                             </div>
                         </div>
                     </div>
