@@ -91,13 +91,13 @@
                             <h3 class="widget_title">Recent Post</h3>
                             @foreach ($artikelterkait as $item)
                                 <div class="media post_item">
-                                    <a href="single-articles.html">
+                                    <a href="{{ Url('articles/show/' . $item->kode) }}">
                                         <img height="80" width="80" style="object-fit: cover"
                                             src="{{ empty($item->file) ? Url('no-image.png') : $item->file }}"
                                             alt="post">
                                     </a>
                                     <div class="media-body">
-                                        <a href="single-articles.html">
+                                        <a href="{{ Url('articles/show/' . $item->kode) }}">
                                             <h3 class="descritption_content">{{ $item->title }}</h3>
                                         </a>
                                         <p>{{ date("d F Y", strtotime($item->created_at)) }}</p>
