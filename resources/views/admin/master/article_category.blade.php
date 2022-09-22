@@ -25,6 +25,20 @@
                             <option value="1">Ya</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
+                    </div>
+                    <label>Photo: </label>
+                    <div class="form-group">
+                        <input type="file" class="form-control fileFormBase64">
+                        <input type="hidden" class="base_64" name="fileBase64">
+                        <input type="hidden" class="fileChange" name="isChange" value="0">
+                        <div class="avatar avatar-xl me-3">
+                            <img class="preview-profile base64-preview" src="{{ asset('person-icon.png') }}"
+                                alt="" srcset="">
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -46,7 +60,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Seting Gizi Edit </h4>
+                <h4 class="modal-title">Category Edit </h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <i data-feather="x"></i>
                 </button>
@@ -71,6 +85,20 @@
                             <option value="0">Tidak</option>
                             <option value="1">Ya</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
+                    </div>
+                    <label>Photo: </label>
+                    <div class="form-group">
+                        <input type="file" class="form-control fileFormBase64">
+                        <input type="hidden" class="base_64" name="fileBase64">
+                        <input type="hidden" class="fileChange" name="isChange" value="0">
+                        <div class="avatar avatar-xl me-3">
+                            <img class="preview-profile base64-preview" src="{{ asset('person-icon.png') }}"
+                                alt="" srcset="">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -160,6 +188,10 @@
                         $("#formEditCategory").find("[name=" + index + "]").val(value)
                     });
 
+                    if (!empty(resp.Data[0].file)) {
+                        $("#formEditCategory").find(".base64-preview").attr("src", resp.Data[0].file);
+                    }
+
                     hiddenComponent("#formEditCategory", false)
                 } else {
                     hideModal("#ModalEditCategory")
@@ -167,6 +199,61 @@
                 }
             })
         })
+    });
+
+    $(".fileFormBase64").change(function() {
+        let selector = $(this);
+        let parent = $(this).parent();
+
+        if (!this.files || !this.files[0]) {
+            return;
+        }
+        let tipefile = this.files[0].type.toString();
+        if (tipefile != "image/png" && tipefile != "image/jpeg" && tipefile != "image/bmp") {
+            $(this).val("");
+            toastrshow("warning", "Format salah, pilih file dengan format jpg/png/bmp", "Warning");
+            return;
+        }
+        // if((this.files[0].size / 1024) > 2048){
+        //     $(this).val("");
+        //     toastrshow("warning", "Maximum file size is 2 MB", "Warning");
+        //     return;
+        // }
+
+        let FR = new FileReader();
+        FR.addEventListener("load", function(readerEvent) {
+            let image = new Image();
+            image.onload = function(imageEvent) {
+                let canvas = document.createElement("canvas"),
+                    max_size = 300, // TODO : pull max size from a site config
+                    width = image.width,
+                    height = image.height;
+
+                if (width > height) {
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                } else {
+                    if (height > max_size) {
+                        width *= max_size / height;
+                        height = max_size;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+
+                let base64 = canvas.toDataURL("image/jpeg");
+                image_base64 = base64;
+                // base64 = base64.replace(/^data:image\/(png|jpg|jpeg|bmp);base64,/, '');
+                parent.find(".base_64").val(base64);
+                parent.find(".fileChange").val(1);
+                parent.find(".base64-preview").prop("src", image_base64);
+            };
+            image.src = readerEvent.target.result;
+        });
+        FR.readAsDataURL(this.files[0]);
     });
 
     $(".modal").on('hide.bs.modal', function(event) {

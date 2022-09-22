@@ -192,6 +192,21 @@ class ArticleController extends Controller
             }
         }
 
+        if (!empty($request->fileBase64)) {
+            $file = $request->fileBase64;
+            $extension = explode('/', explode(':', substr($file, 0, strpos($file, ';')))[1])[1];
+            $replace = substr($file, 0, strpos($file, ',') + 1);
+            $image = str_replace($replace, '', $file);
+            $image = str_replace(' ', '+', $image);
+            $imageName = Str::random(10) . '.' . $extension;
+
+            $request->validate([
+                $file => 'mimes:jpeg,bmp,png|max:1000' // Only allow .jpg, .bmp and .png file types.
+            ]);
+            $data['file'] = Storage::disk('public')->put($imageName, base64_decode($image));
+            $data['file'] = url('storage/'.$imageName);
+        }
+
         $data = ArticleCategory::updateOrCreate(
             ['id' => $request->id],
             $data
