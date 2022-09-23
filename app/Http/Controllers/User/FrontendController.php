@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RiwayatCekGizi;
 use App\Models\Faq;
 use App\Models\Content;
+use App\Models\Leaflet;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Articles;
 use App\Models\ArticleCategory;
@@ -121,6 +122,8 @@ class FrontendController extends Controller
     {
         $categori = ArticleCategory::all();
         $artikel = Articles::latest()->where("kode", $kode)->first();
+        $leaflet = Leaflet::all();
+
         if (empty($artikel)) {
             return Redirect::to("/");
         }
@@ -129,7 +132,7 @@ class FrontendController extends Controller
         $artikel->emoticon = $this->reactionHtml($listReaction);
 
         $artikelterkait = Articles::latest()->limit(4)->get();
-        return view('user.detail_blog', compact('categori', 'artikel', 'artikelterkait'));
+        return view('user.detail_blog', compact('categori', 'artikel', 'artikelterkait','leaflet'));
     }
 
     public function reaction(Request $request)
