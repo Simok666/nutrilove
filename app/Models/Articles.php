@@ -39,6 +39,6 @@ class Articles extends Model
 
     public function comment()
     {
-        return $this->belongsTo(ArticleCategory::class, "id_category", "id");
+        return $this->belongsToMany(CommentArticle::class, $this->table,  "id", "id" , "id" , "article_id");
     }
 }

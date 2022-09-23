@@ -17,7 +17,7 @@ class CreateCommentArticle extends Migration
             $table->id();
             $table->integer("user_id");
             $table->integer("article_id");
-            $table->integer("comment");
+            $table->longText("comment");
             $table->timestamps();
         });
     }

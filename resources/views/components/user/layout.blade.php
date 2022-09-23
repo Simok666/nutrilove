@@ -353,6 +353,34 @@
 
     </main><!-- End #main -->
 
+    <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary me-md-2" data-bs-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-primary" form="login-form" type="submit">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <x-user.footer>
     </x-user.footer>
 
@@ -391,6 +419,30 @@
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
         })();
+
+
+        const showLoginModal = () => {
+            var myModal = new bootstrap.Modal(document.getElementById('login-modal'))
+            modalToggle = document.getElementById('login-modal') // relatedTarget
+            myModal.show(modalToggle)
+        }
+
+        var addComment = $("#login-form").validate({
+            submitHandler: function(form) {
+                submitData(form, "/login/ajax", function(resp) {
+                    location.reload()
+                })
+            },
+            errorPlacement: function(error, element) {
+                if (element.parent(".input-group").length) {
+                    error.insertAfter(element.parent()); // radio/checkbox?
+                } else if (element.hasClass("select2") || element.hasClass("select")) {
+                    error.insertAfter(element.next("span")); // select2
+                } else {
+                    error.insertAfter(element); // default
+                }
+            }
+        });
     </script>
     <!--End of Tawk.to Script-->
     {{ $script ?? '' }}

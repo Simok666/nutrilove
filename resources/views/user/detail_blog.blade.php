@@ -5,6 +5,12 @@
         <link rel="stylesheet" type="text/css" href="{{ Url('reaction/css/reaction.css') }}" />
 
         <style>
+            .userComment {
+                width: 50px !important;
+                background-size: cover;
+                height: 50px;
+            }
+
             .like-details {
                 font-size: 14px
             }
@@ -66,13 +72,13 @@
                                     <button class="reaction-data reaction-angry"><span
                                             class="legend-reaction">Angry</span></button>
                                 </div>
-    
+
                                 <div class="like-stat" style="margin-left: 50px">
                                     <span class="like-emo">
-                                        <?= $artikel->emoticon["emoticon"] ?? "" ?>
+                                        <?= $artikel->emoticon['emoticon'] ?? '' ?>
                                     </span>
                                     <span class="like-details like-details-emo">
-                                        <?= $artikel->emoticon["count"] ?? "" ?>
+                                        <?= $artikel->emoticon['count'] ?? '' ?>
                                     </span>
                                 </div>
                             </div>
@@ -81,16 +87,17 @@
                                     <span class="align-middle like-stat">
                                         <i class="fa fa-comment"></i>
                                     </span>
-                                    06 Comments
+                                    {{ $artikel->comment->count() }} Comments
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <img src="{{ empty($artikel->user->photo) ? Url('no-image.png') : Url($artikel->user->photo) }}" alt="">
+                            <img src="{{ empty($artikel->user->photo) ? Url('no-image.png') : Url($artikel->user->photo) }}"
+                                alt="">
                             <div class="media-body">
-                                <a href="{{ Url('articles/author/' .$artikel->user_id) }}">
+                                <a href="{{ Url('articles/author/' . $artikel->user_id) }}">
                                     <h4>{{ $artikel->user->name }}</h4>
                                 </a>
                                 <p>{{ $artikel->user->description }}</p>
@@ -98,62 +105,47 @@
                         </div>
                     </div>
                     <div class="comments-area" id="comment">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="user_assets/img/comment/comment_1.png" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill
-                                            which them
-                                            Blessed, give fill lesser bearing multiply sea night grass fourth day sea
-                                            lesser
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#reply" class="btn-reply text-uppercase">reply</a>
+                        <h4>{{ (int) $artikel->comment->count() }} Comments</h4>
+                        @foreach ($artikel->comment as $comment)
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img class="userComment"
+                                                src="{{ empty($comment->user->photo) ? asset('person-icon.png') : Url($comment->user->photo) }}"
+                                                alt="">
+                                        </div>
+                                        <div class="desc">
+                                            <p class="comment">
+                                                {{ $comment->comment }}
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <h5>
+                                                        <a href="#">{{ $comment->user->name }}</a>
+                                                    </h5>
+                                                    <p class="date">
+                                                        {{ date('d M Y H:i:s', strtotime($comment->created_at)) }}</p>
+                                                </div>
+                                                <div class="reply-btn">
+                                                    <a href="#reply" class="btn-reply text-uppercase">reply</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="comment-form" id="reply">
                         <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
+                        <form class="form-contact comment_form" id="commentForm">
+                            <input type="hidden" name="article_id" value="{{ $artikel->id }}">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
                                         <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
-                                            placeholder="Write Comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text"
-                                            placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email"
-                                            placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text"
-                                            placeholder="Website">
+                                            placeholder="Write Comment" required minlength="5"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -167,14 +159,14 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form action="{{ Url("/articles/search") }}" method="GET">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                        <input type="text" name="search" class="form-control" placeholder='Search Keyword'
                                             onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'Search Keyword'">
                                         <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            <button class="btns" type="submit"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -200,16 +192,16 @@
                             <h3 class="widget_title">Recent Post</h3>
                             @foreach ($artikelterkait as $item)
                                 <div class="media post_item">
-                                    <a href="single-articles.html">
+                                    <a href="{{ Url('articles/show/' . $item->kode) }}">
                                         <img height="80" width="80" style="object-fit: cover"
                                             src="{{ empty($item->file) ? Url('no-image.png') : $item->file }}"
                                             alt="post">
                                     </a>
                                     <div class="media-body">
-                                        <a href="single-articles.html">
+                                        <a href="{{ Url('articles/show/' . $item->kode) }}">
                                             <h3 class="descritption_content">{{ $item->title }}</h3>
                                         </a>
-                                        <p>{{ date("d F Y", strtotime($item->created_at)) }}</p>
+                                        <p>{{ date('d F Y', strtotime($item->created_at)) }}</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -223,8 +215,8 @@
     <x-slot name="script">
         <script type="text/javascript" src="{{ Url('reaction/js/reaction.js') }}"></script>
         <script>
-            $(document).ready(function () {
-                $(".reaction-data").click(function () {  
+            $(document).ready(function() {
+                $(".reaction-data").click(function() {
                     let data = $(this).find("span").html()
                     let artikel_id = $(".remove-reaction").data("id")
                     reactionArticle(artikel_id, data.toLowerCase())
@@ -234,13 +226,34 @@
             const reactionArticle = (article_id, reaction) => {
                 ajaxData("/article/reaction", {
                     "article_id": article_id,
-                    "reaction"  : reaction
+                    "reaction": reaction
                 }, function(resp) {
                     $(".like-emo").html(resp.data.emoticon)
                     $(".like-details-emo").html(resp.data.count)
                     $(".remove-reaction").focus();
                 })
-            } 
+            }
+
+            var addComment = $("#commentForm").validate({
+                submitHandler: function(form) {
+                    submitData(form, "/article/comment", function(resp) {
+                        location.reload();
+                    }, function(resp) {
+                        if (!empty(resp.action)) {
+                            if (resp.action == "login") showLoginModal();
+                        }
+                    })
+                },
+                errorPlacement: function(error, element) {
+                    if (element.parent(".input-group").length) {
+                        error.insertAfter(element.parent()); // radio/checkbox?
+                    } else if (element.hasClass("select2") || element.hasClass("select")) {
+                        error.insertAfter(element.next("span")); // select2
+                    } else {
+                        error.insertAfter(element); // default
+                    }
+                }
+            });
         </script>
     </x-slot>
 

@@ -17,6 +17,12 @@
     <section class="blog_area section-padding">
         <div class="container">
             <div class="row">
+                @isset($search)
+                    <div class="col-lg-6 pt-5 pt-lg-0">
+                        <h3 data-aos="fade-up">Search results for "{{ $search ?? "" }}"
+                        </h3>
+                    </div>
+                @endisset
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
                         @foreach ($artikel as $item)
@@ -51,26 +57,26 @@
                                 </div>
                             </article>
                         @endforeach
-                        {!! $artikel->links("elements.custom-pagenation") !!}
+                        {!! $artikel->links('elements.custom-pagenation') !!}
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            {{-- <form action="#">
+                            <form action="{{ Url('/articles/search') }}" method="GET">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
+                                        <input type="text" name="search" class="form-control"
+                                            placeholder='Search Keyword' onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'Search Keyword'">
                                         <div class="input-group-append">
-                                            <button class="btns" type="button"><i class="ti-search"></i></button>
+                                            <button class="btns" type="submit"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
                                     type="submit">Search</button>
-                            </form> --}}
+                            </form>
                         </aside>
 
                         <aside class="single_sidebar_widget post_category_widget">
@@ -100,7 +106,7 @@
                                         <a href="{{ Url('articles/show/' . $item->kode) }}">
                                             <h3 class="descritption_content">{{ $item->title }}</h3>
                                         </a>
-                                        <p>{{ date("d F Y", strtotime($item->created_at)) }}</p>
+                                        <p>{{ date('d F Y', strtotime($item->created_at)) }}</p>
                                     </div>
                                 </div>
                             @endforeach
