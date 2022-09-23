@@ -14,6 +14,7 @@ use App\Models\Articles;
 use App\Models\ArticleCategory;
 use App\Models\Reaction;
 use Illuminate\Support\Facades\DB;
+use App\Models\CommentArticle;
 
 
 class FrontendController extends Controller
@@ -39,7 +40,7 @@ class FrontendController extends Controller
                     "Message"   => "Data undefined, tolong masukan data dengan benar"
                 ];
             } else {
-                $randomString = time().$this->randomString(15);
+                $randomString = time() . $this->randomString(15);
                 $data = array_merge($request->all(), ["user_id" => empty($user->id) ? 0 : $user->id, "random_string" => $randomString]);
                 $insertData = RiwayatCekGizi::create($data);
                 if ($insertData) {
@@ -104,6 +105,18 @@ class FrontendController extends Controller
         return view('user.blog', compact('categori', 'artikel', 'artikelterkait'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $data = Articles::latest()
+            ->where('title', "like", "%" . $search . "%")
+            ->where('desc_content', "like", "%" . $search . "%");
+        $categori = ArticleCategory::all();
+        $artikel = $data->paginate(10)->appends($request->except('page'));
+        $artikelterkait = Articles::latest()->limit(4)->get();
+        return view('user.blog', compact('categori', 'artikel', 'artikelterkait' , 'search'));
+    }
+
     public function show(Request $request, $kode)
     {
         $categori = ArticleCategory::all();
@@ -160,10 +173,10 @@ class FrontendController extends Controller
 
         $reaction = explode(",", $data->reaction);
         foreach ($reaction as $item) {
-            $result["emoticon"][] = '<span class="like-btn-' . $item . '"></span>'; 
+            $result["emoticon"][] = '<span class="like-btn-' . $item . '"></span>';
         }
         $result["emoticon"] = implode("", $result["emoticon"]);
-        $result['count'] = $data->count ." Reaction";
+        $result['count'] = $data->count . " Reaction";
 
         return $result;
     }
@@ -215,11 +228,49 @@ class FrontendController extends Controller
 
         return response()->json(['success' => "Berhasil kirim pertanyaan"]);
     }
-  
-    public function feIndex(){
-        $data['faq'] = Faq::select()->where('frequently','=','frequently')->get();
-        $data['content'] = Content::select()->where('kode','like','%instagram%')->get();
-        return view('user.index',$data);
+
+    public function feIndex()
+    {
+        $data['faq'] = Faq::select()->where('frequently', '=', 'frequently')->get();
+        $data['content'] = Content::select()->where('kode', 'like', '%instagram%')->get();
+        return view('user.index', $data);
     }
 
+    public function comment(Request $request)
+    {
+        if (empty(Auth::user()->id)) {
+            return [
+                "IsError"   => true,
+                "Message"   => "Silahkan login Dahulu",
+                "action"    => "login"
+            ];
+        }
+
+        $data = $request->all();
+        $data["user_id"] = Auth::user()->id;
+        $insert = CommentArticle::create($data);
+
+        return [
+            "IsError" => false,
+            "Message" => "Data disimpan"
+        ];
+    }
+
+    public function login(Request $request)
+    {
+        $email      = $request->input('email');
+        $password   = $request->input('password');
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return response()->json([
+                'IsError' => false,
+                'Message' => "Login Successed"
+            ], 200);
+        } else {
+            return response()->json([
+                'IsError' => true,
+                'Message' => 'Login Gagal!'
+            ], 200);
+        }
+    }
 }

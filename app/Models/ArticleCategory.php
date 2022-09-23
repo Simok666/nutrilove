@@ -16,6 +16,8 @@ class ArticleCategory extends Model
     protected $fillable = [
         "kode",
         "nama",
+        "file",
+        "description",
         "is_show_navbar"
     ];
 

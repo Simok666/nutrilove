@@ -85,9 +85,13 @@ Route::get('/articles', [FrontendController::class, "listArticles"])->name('user
 Route::get('/articles/category/{category}', [FrontendController::class, "category"]);
 Route::get('/articles/author/{author}', [FrontendController::class, "author"]);
 Route::get('/articles/show/{kode}', [FrontendController::class, "show"]);
+Route::get('/articles/search', [FrontendController::class, "search"]);
 
 Route::post('/article/reaction', [FrontendController::class, "reaction"]);
+Route::post('/article/comment', [FrontendController::class, "comment"]);
 
+
+Route::post('/login/ajax', [FrontendController::class, "login"]);
 
 Route::post('/faq', [FrontendController::class, "faq"])->name('users.faq');
 

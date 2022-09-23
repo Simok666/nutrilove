@@ -113,7 +113,7 @@ function submitData(selectorform, url, successfunc, errorfunc) {
 		retryLimit: 3,
 		success: function (resp) {
 			if (resp.IsError == false) {
-				toastrshow("success", "Data berhasil disimpan", "Success");
+				toastrshow("success", (resp.Message ?? "Data berhasil disimpan"), "Success");
 				$(selectorform).parents(".modal").modal("hide"); //Tutup modal
 				resetForm(selectorform) // Reset Form
 				if (successfunc != "") {

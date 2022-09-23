@@ -1,5 +1,5 @@
-<div class="modal fade text-left" id="adminModal" tabindex="-1" role="dialog"
-    aria-labelledby="AdminModal" aria-hidden="true">
+<div class="modal fade text-left" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="AdminModal"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <center class="loading">
-                    <img width="100px" src="{{ asset("loading-data.gif") }}">
+                    <img width="100px" src="{{ asset('loading-data.gif') }}">
                 </center>
                 <form action="{! admin.upsert !}" method="POST" id="formAdmin">
                     <label>Photo: </label>
@@ -38,6 +38,18 @@
                     <label>Phone: </label>
                     <div class="form-group">
                         <input type="tel" name="telp" placeholder="Phone Number" class="form-control" required>
+                    </div>
+                    <label>Role: </label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="role" required>
+                            <option value="">Pilih role</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>My Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
                     </div>
                     <label>Password: </label>
                     <div class="form-group">
@@ -77,7 +89,7 @@
             </div>
             <div class="modal-body">
                 <center class="loading">
-                    <img width="100px" src="{{ asset("loading-data.gif") }}">
+                    <img width="100px" src="{{ asset('loading-data.gif') }}">
                 </center>
                 <form action="{! admin.upsert !}" method="POST" id="formAdminEdit">
                     <label>Photo: </label>
@@ -97,7 +109,8 @@
                     </div>
                     <label>Email: </label>
                     <div class="form-group">
-                        <input type="email" name="email" required placeholder="Email Address" class="form-control">
+                        <input type="email" name="email" required placeholder="Email Address"
+                            class="form-control">
                     </div>
                     <label>Address: </label>
                     <div class="form-group">
@@ -105,7 +118,20 @@
                     </div>
                     <label>Phone: </label>
                     <div class="form-group">
-                        <input type="tel" name="telp" placeholder="Phone Number" class="form-control" required>
+                        <input type="tel" name="telp" placeholder="Phone Number" class="form-control"
+                            required>
+                    </div>
+                    <label>Role: </label>
+                    <div class="form-group">
+                        <select class="form-control select2" name="role" required>
+                            <option value="">Pilih role</option>
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>My Description</label>
+                        <textarea class="form-control" name="description"rows="3"></textarea>
                     </div>
                 </form>
             </div>
@@ -127,9 +153,9 @@
     $(document).ready(function() {
         var FrmAddAdmin = $("#formAdmin").validate({
             submitHandler: function(form) {
-                submitData(form, "/users/upsert", function (resp) {
+                submitData(form, "/users/upsert", function(resp) {
                     if (empty(resp.IsError)) ReloadDataTable("#UserTable")
-                })            
+                })
             },
             errorPlacement: function(error, element) {
                 if (element.parent(".input-group").length) {
@@ -144,7 +170,7 @@
 
         var FrmEditAdmin = $("#formAdminEdit").validate({
             submitHandler: function(form) {
-                submitData(form, "/users/upsert", function (resp) {
+                submitData(form, "/users/upsert", function(resp) {
                     if (empty(resp.IsError)) ReloadDataTable("#UserTable")
                 })
             },
@@ -188,15 +214,16 @@
             hiddenComponent("#formAdminEdit", true)
             ajaxData("/detail/users", {
                 "id": data.id
-            }, function (resp) {
+            }, function(resp) {
                 if (!empty(resp.Data)) {
                     showLoading("#adminModalEdit", false)
-                    $.each(resp.Data[0], function (index, value) { 
-                         $("#formAdminEdit").find("[name="+ index +"]").val(value)
+                    $.each(resp.Data[0], function(index, value) {
+                        $("#formAdminEdit").find("[name=" + index + "]").val(value)
                     });
 
                     if (!empty(resp.Data[0].photo)) {
-                        $("#adminModalEdit").find(".base64-preview").attr("src", base_url + '/'+ resp.Data[0].photo);
+                        $("#adminModalEdit").find(".base64-preview").attr("src", base_url +
+                            '/' + resp.Data[0].photo);
                     }
                     hiddenComponent("#formAdminEdit", false)
                 } else {
@@ -206,7 +233,7 @@
             })
         })
 
-        $(".btn-admin-tambah").click(function () {
+        $(".btn-admin-tambah").click(function() {
             $("#adminModal .loading").addClass("d-none");
         })
     });
@@ -268,11 +295,11 @@
         FR.readAsDataURL(this.files[0]);
     });
 
-    $(".modal").on('hide.bs.modal', function (event) {
+    $(".modal").on('hide.bs.modal', function(event) {
         $(this).find('input').val("");
         $(this).find('select').val("").trigger('change');
         $(this).find('textarea').val("").trigger('change');
         $(this).find('.loading').removeClass('hidden');
-        $(this).find('.base64-preview').attr("src" , "{{ asset('person-icon.png') }}")
+        $(this).find('.base64-preview').attr("src", "{{ asset('person-icon.png') }}")
     });
 </script>

@@ -22,7 +22,12 @@
                       </ul>
                   </li>
                   <li><a class="nav-link scrollto" href="{{ Url("contact") }}">Contact</a></li>
-                  <li><a class="nav-link scrollto" href="{{ Url("login") }}">Login</a></li>
+                  @if (empty(Auth::user()->id))
+                    <li><a class="nav-link scrollto" href="{{ Url("login") }}">Login</a></li>
+
+                  @else
+                    <li><a class="nav-link scrollto" href="{{ Url("logout") }}">Logout</a></li>
+                  @endif
               </ul>
               <i class="bi bi-list mobile-nav-toggle"></i>
           </nav><!-- .navbar -->
