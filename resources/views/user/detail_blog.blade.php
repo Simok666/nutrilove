@@ -48,6 +48,24 @@
                                 <?= $artikel->desc_content ?>
                             </p>
                         </div>
+                        <section id="faq" class="faq section-bg">
+                            <div class="container" data-aos="fade-up">
+                          
+                              <ul class="faq-list" data-aos="fade-up" data-aos-delay="100">
+                                @foreach($leaflet as $value)
+                                <li>
+                                    <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">{{$value->title}}<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                                    <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                                      <p>
+                                        <embed src="{{ $value->file }}" type="application/pdf" width="100%" height="600px">
+                                      </p>
+                                    </div>
+                                </li>
+                                @endforeach
+                              </ul>
+                          
+                            </div>
+                          </section>
                     </div>
                     <div class="navigation-top">
                         <div class="remove-reaction" style="display: none" data-id="{{ $artikel->id }}"></div>
