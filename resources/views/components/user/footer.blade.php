@@ -7,7 +7,7 @@
     <div class="row">
 
       <div class="col-lg-3 col-md-6 footer-contact">
-        <h3><img src="https://nutrilove.id/wp-content/uploads/2022/04/Logo3.png" alt="" class="img-fluid"></h3>
+        <h3><img src="https://nutrilove.id/img.png" alt="" class="img-fluid"></h3>
         <p>
           <br>
           Ijen St No.77C, Oro-oro Dowo, <br> 
