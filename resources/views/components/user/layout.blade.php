@@ -299,8 +299,8 @@
 
 <body>
 
-    <x-user.header>
-    </x-user.header>
+    <x-User.Header>
+    </x-User.Header>
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
 

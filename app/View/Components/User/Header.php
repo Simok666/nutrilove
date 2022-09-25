@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components\user;
+namespace App\View\Components\User;
 
 use Illuminate\View\Component;
 use App\Models\ArticleCategory;
 
-class header extends Component
+class Header extends Component
 {
     /**
      * Create a new component instance.

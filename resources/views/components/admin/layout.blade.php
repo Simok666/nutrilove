@@ -31,9 +31,9 @@
 
 <body>
     <div id="app">
-        <x-admin.navbar>
+        <x-Admin.Navbar>
 
-        </x-admin.navbar>
+        </x-Admin.Navbar>
 
         <div id="main">
             
