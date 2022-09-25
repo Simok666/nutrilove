@@ -99,6 +99,8 @@ Route::get('/cekgizi', [FrontendController::class, "cekgizi"])->name('user.cekgi
 Route::post('/cekgizi', [FrontendController::class, "cekgizi"]);
 
 Route::get('/cekgizi/{id}', [FrontendController::class, "cekgiziDetail"])->name('user.cekgiziDetail');
+Route::get('/leaflet', [FrontendController::class, "leaflet"]);
+Route::get('/leaflet/detail', [FrontendController::class, "leafletDetail"]);
 
 Route::get('/single-articles', function () {
     return view('user.single_blog');

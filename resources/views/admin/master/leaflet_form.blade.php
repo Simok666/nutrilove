@@ -180,6 +180,7 @@
 
             $("#myPdf").on("change", function(e) {
                 var file = e.target.files[0]
+                if (empty(file)) return;
                 if (file.type == "application/pdf") {
                     var fileReader = new FileReader();
                     fileReader.onload = function() {
