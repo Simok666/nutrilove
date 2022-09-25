@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\LeafletController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\User\FrontendController;
+use App\Http\Controllers\Admin\RiwayatGiziController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,6 +66,7 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::post('/admin/article/kategori', [ArticleController::class, 'category'])->name('article_category');
     Route::post('admin/article/kategori/upsert', [ArticleController::class, 'category_upsert'])->name('article_category.upsert');
 
+    route::get('admin/gizi', [RiwayatGiziController::class, 'index'])->name('riwayat.gizi');
     route::get('admin/setting/gizi', [SettingGiziController::class, 'index'])->name('setting.gizi');
     route::post('admin/setting/gizi/upsert', [SettingGiziController::class, 'upsert'])->name('setting.gizi.upsert');
 });
