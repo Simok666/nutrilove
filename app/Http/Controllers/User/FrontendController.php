@@ -150,7 +150,7 @@ class FrontendController extends Controller
 
         $data = Leaflet::latest()->where('kode', $kode);
         $leaflet = $data->first();
-        if (empty($kode)) return Redirect::to("/leaflet");
+        if (empty($kode) || empty($leaflet->file)) return Redirect::to("/leaflet");
         
         return view('user.leafletDetail', compact("leaflet"));
     }
