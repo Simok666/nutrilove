@@ -33,7 +33,7 @@
                 <h2>Leaflet</h2>
             </div>
             <div class="row">
-                <iframe src="http://flowpaper.com/flipbook/{{ $leaflet->file }}" width="70%" height="800" style="border: none;" allowFullScreen>
+                <iframe src="https://flowpaper.com/flipbook/{{ $leaflet->file }}" width="70%" height="800" style="border: none;" allowFullScreen>
                 </iframe>
             </div>
         </div>
