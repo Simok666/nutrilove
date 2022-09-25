@@ -122,7 +122,6 @@ class FrontendController extends Controller
     {
         $categori = ArticleCategory::all();
         $artikel = Articles::latest()->where("kode", $kode)->first();
-        $leaflet = Leaflet::all();
 
         if (empty($artikel)) {
             return Redirect::to("/");
@@ -132,7 +131,28 @@ class FrontendController extends Controller
         $artikel->emoticon = $this->reactionHtml($listReaction);
 
         $artikelterkait = Articles::latest()->limit(4)->get();
-        return view('user.detail_blog', compact('categori', 'artikel', 'artikelterkait','leaflet'));
+        return view('user.detail_blog', compact('categori', 'artikel', 'artikelterkait'));
+    }
+
+    public function leaflet(Request $request)
+    {
+        $search = $request->search;
+        $data = Leaflet::latest()
+            ->where('title', "like", "%" . $search . "%");
+        $leaflet = $data->paginate(10)->appends($request->except('page'));
+        return view('user.leaflet', compact("leaflet"));
+    }
+
+    public function leafletDetail(Request $request)
+    {
+        $kode = $request->kode;
+        if (empty($kode)) return Redirect::to("/leaflet");
+
+        $data = Leaflet::latest()->where('kode', $kode);
+        $leaflet = $data->first();
+        if (empty($kode)) return Redirect::to("/leaflet");
+        
+        return view('user.leafletDetail', compact("leaflet"));
     }
 
     public function reaction(Request $request)

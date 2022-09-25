@@ -48,7 +48,7 @@ class LeafletController extends Controller
         $data = $request->all();
         
         if (!empty($request->kode)) {
-            $rules = array('kode' => 'required|unique:content,kode');
+            $rules = array('kode' => 'required|unique:leaflet,kode');
 
             if (!empty($request->id)) {
                 $rules["kode"] = $rules["kode"] . ',' . $request->id;
