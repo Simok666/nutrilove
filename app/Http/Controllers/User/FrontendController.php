@@ -256,6 +256,7 @@ class FrontendController extends Controller
     {
         $data['faq'] = Faq::select()->where('frequently', '=', 'frequently')->get();
         $data['content'] = Content::select()->where('kode', 'like', '%instagram%')->get();
+        $data["category"] = ArticleCategory::where("is_show_navbar", true)->get();
         return view('user.index', $data);
     }
 

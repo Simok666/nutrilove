@@ -52,7 +52,7 @@
                                                 href="{{ Url('articles/category/' . $item->category->kode) }}"><i
                                                     class="fa fa-user"></i>
                                                 {{ $item->category->nama }} </a></li>
-                                        <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
+                                        <li><a href="#"><i class="fa fa-comments"></i> {{ $item->comment->count() }} Comments</a></li>
                                     </ul>
                                 </div>
                             </article>
