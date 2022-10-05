@@ -1,11 +1,11 @@
-<x-user.layout title="Contact">
+<x-user.layout title="Kontak Kami">
 <!-- ======= Contact Us Section ======= -->
 <section id="contact" class="contact">
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Contact Us</h2>
-        <p>Contact us the get started</p>
+        <h2>Hubungi Kami</h2>
+        <p>Hubungi kami untuk memulai</p>
       </div>
 
       <div class="row">
@@ -13,9 +13,7 @@
         <div class="col-lg-5 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
           <div class="info">
             <div class="address">
-              <i class="bi bi-geo-alt"></i>
-              <h4>Location:</h4>
-              <p>Ijen St No.77C, Oro-oro Dowo, Klojen, Malang City, East Java 65119</p>
+             
             </div>
 
             <div class="email">
@@ -26,7 +24,7 @@
 
             <div class="phone">
               <i class="bi bi-phone"></i>
-              <h4>Call:</h4>
+              <h4>No. Telp:</h4>
               <p>+62-341-566075</p>
             </div>
 
@@ -39,20 +37,20 @@
           <form action="" id="faq" method="POST" class="php-email-form">
             <div class="row">
               <div class="form-group col-md-6">
-                <label for="name">Your Name</label>
+                <label for="name">Nama </label>
                 <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
               </div>
               <div class="form-group col-md-6 mt-3 mt-md-0">
-                <label for="name">Your Email</label>
+                <label for="name">Email</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
               </div>
             </div>
             <div class="form-group mt-3">
-              <label for="name">Subject</label>
+              <label for="name">Kategori Pertanyaan</label>
               <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
             </div>
             <div class="form-group mt-3">
-              <label for="name">Message</label>
+              <label for="name">Pertanyaan</label>
               <textarea class="form-control" name="message" rows="10" required></textarea>
             </div>
             {{-- <div class="my-3">
@@ -60,7 +58,7 @@
               <div class="error-message"></div>
               <div class="sent-message">Your message has been sent. Thank you!</div>
             </div> --}}
-            <div class="text-center"><button type="submit">Send Message</button></div>
+            <div class="text-center"><button type="submit">Kirim Pertanyaan</button></div>
           </form>
         </div>
 

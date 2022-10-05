@@ -11,17 +11,17 @@
           <nav id="navbar" class="navbar">
               <ul>
                   <li><a class="nav-link scrollto active" href={{ Url("/") }}>Home</a></li>
-                  <li><a class="nav-link scrollto" href="{{ Url("about") }}">About Us</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("about") }}">Tentang Kami</a></li>
                   <li><a class="nav-link scrollto" href="{{ Url("cekgizi") }}">Cek Status Gizi</a></li>
                   <li><a class="nav-link scrollto" href="{{ Url("leaflet") }}">Leaflet</a></li>
-                  <li class="dropdown"><a href="#"><span>Article</span> <i class="bi bi-chevron-down"></i></a>
+                  <li class="dropdown"><a href="#"><span>Artikel</span> <i class="bi bi-chevron-down"></i></a>
                       <ul>
                             @foreach ($category as $item)
                                 <li><a href="{{ Url("articles/category/". $item->kode) }}">{{ $item->nama }}</a></li>
                             @endforeach
                       </ul>
                   </li>
-                  <li><a class="nav-link scrollto" href="{{ Url("contact") }}">Contact</a></li>
+                  <li><a class="nav-link scrollto" href="{{ Url("contact") }}">Hubungi Kami</a></li>
                   @if (empty(Auth::user()->id))
                     <li><a class="nav-link scrollto" href="{{ Url("login") }}">Login</a></li>
 

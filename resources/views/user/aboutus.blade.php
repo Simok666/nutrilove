@@ -1,4 +1,4 @@
-<x-user.layout title="Index">
+<x-user.layout title="Tentang Kami">
     
   <!-- ======= About Section ======= -->
   <section id="about" class="about">
@@ -9,7 +9,7 @@
           <img src="user_assets/img/about-img.svg" class="img-fluid" alt="" data-aos="zoom-in">
         </div>
         <div class="col-lg-6 pt-5 pt-lg-0">
-          <h3 data-aos="fade-up">About us</h3>
+          <h3 data-aos="fade-up">Tentang Kami</h3>
           <p data-aos="fade-up" data-aos-delay="100">
             Informasi Tentang Kami dan Team Kami
           </p>
