@@ -1,4 +1,4 @@
-<x-user.layout title="Blog">
+<x-user.layout title="Artikel">
     <x-slot name="styles">
         <style>
             .descritption_content {

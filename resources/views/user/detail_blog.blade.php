@@ -1,4 +1,4 @@
-<x-user.layout title="Index">
+<x-user.layout title="Detail Artikel">
     <x-slot name="styles">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <!-- Css for reaction system -->
@@ -208,6 +208,12 @@
                         </aside>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="container" data-aos="fade-up">
+            <div class="col-lg-12 d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-labeled btn-info">
+                    Kembali ke Home </button>
             </div>
         </div>
     </section>

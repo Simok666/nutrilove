@@ -13,24 +13,24 @@
           Ijen St No.77C, Oro-oro Dowo, <br> 
           Klojen, Malang City, <br>
           East Java 65119 <br><br>
-          <strong>Phone:</strong> +62-341-566075<br>
+          <strong>No. Telp:</strong> +62-341-566075<br>
           <strong>Email:</strong> direktorat@poltekkes-malang.ac.id<br>
         </p>
       </div>
 
       <div class="col-lg-3 col-md-6 footer-links">
-        <h4>Useful Links</h4>
+        <h4>Link Berguna</h4>
         <ul>
           <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("/") }}">Home</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("about") }}">About us</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("about") }}">Tentang Kami</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("cekgizi") }}">Cek Status Gizi</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("faq") }}">Faq</a></li>
-          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("contact") }}">Contact</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("leaflet") }}">Leaflet</a></li>
+          <li><i class="bx bx-chevron-right"></i> <a href="{{ Url("contact") }}">Hubungi Kami</a></li>
         </ul>
       </div>
 
       <div class="col-lg-3 col-md-6 footer-links">
-        <h4>Our Services</h4>
+        <h4>Pelayanan Kami</h4>
         <ul>
           <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
           <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
@@ -41,8 +41,8 @@
       </div>
 
       <div class="col-lg-3 col-md-6 footer-links">
-        <h4>Our Social Networks</h4>
-        <p>let's join and stay connected with us</p>
+        <h4>Social Networks Kami</h4>
+        <p>mari bergabung dan tetap terhubung dengan kami</p>
         <div class="social-links mt-3">
           <a href="https://twitter.com/poltekkesmalang" class="twitter"><i class="bx bxl-twitter"></i></a>
           <a href="https://web.facebook.com/poltekkes2017/?_rdc=1&_rdr" class="facebook"><i class="bx bxl-facebook"></i></a>

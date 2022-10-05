@@ -14,8 +14,8 @@
                 border-radius: 3px;
                 color: white;
                 background: black;
-                width: 100px;
-                height: 40px;
+                /* width: 100px;
+                height: 40px; */
                 transition: all .1s ease-in-out;
             }
 
@@ -27,6 +27,7 @@
         </style>
     </x-slot>
     <!-- ======= F.A.Q Section ======= -->
+    <div class="row">
     <section id="services" class="services section-bg">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
@@ -36,6 +37,15 @@
                 <iframe src="https://flowpaper.com/flipbook/{{ $leaflet->file }}" width="70%" height="800" style="border: none;" allowFullScreen>
                 </iframe>
             </div>
+            
         </div>
     </section>
+    <div class="container" data-aos="fade-up">
+        <div class="col-lg-12 d-flex align-items-center justify-content-center">
+            <button type="button" class="btn btn-labeled btn-info">
+                Kembali ke Home</button>
+        </div>
+    </div>
+    </div>
+    
 </x-user.layout>

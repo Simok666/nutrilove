@@ -1,4 +1,4 @@
-<x-user.layout title="Index">
+<x-user.layout title="Gizi">
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container" data-aos="fade-up">

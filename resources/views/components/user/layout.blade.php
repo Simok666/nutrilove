@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ empty($title) ? '' : $title . ' | ' }} {{ config('app.name') }}</title>
+    <title>{{ empty($title) ? '' : $title . ' | NutriLove' }} </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('user_assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ asset('user_assets/img/pngegg.png') }}" rel="icon">
     <link href="{{ asset('user_assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
     <!-- Google Fonts -->
     <link
@@ -293,6 +293,9 @@
             background-position: -240px 0;
             left: 250px;
         }
+        .btn-label-back {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+        .btn-labeled-back {padding-top: 0;padding-bottom: 0;}
+        .btn-back { margin-bottom:10px; }
     </style>
     {{ $styles ?? '' }}
 </head>
