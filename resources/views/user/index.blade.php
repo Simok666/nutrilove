@@ -99,21 +99,21 @@
                             <h4>Tentang Kami</h4>
                             <p> NutriLove beridiri pada tahun 2022 dengan tujuan sebagai media edukasi bagi masyarakat
                                 luas.</p>
-                            <p> platform Kami berfokus pada informasi terkait stunting yang masih menjadi masalah gizi
+                            <p> Platform kami berfokus pada informasi terkait stunting yang masih menjadi masalah gizi
                                 utama di Indonesia.</p>
                             <p> Kami berharap informasi yang kami sediakan dapat membantu anda untuk hidup lebih sehat.
                             </p>
-                            <p> Bersama kita cegah stunting. Eat Well, Life Healty, Good Body. </p>
+                            <p> Bersama kita cegah stunting. </p><p>Eat Well, Life Healty, Good Body. </p>
 
                         </div>
                         <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
                             <i class="bx bxs-user-detail"></i>
                             <h4>Tim Kami :</h4>
                             <p>1. Nike Noviana Putri</p>
-                            <p>2. Larissa Dian Gayatri</p>
-                            <p>3. Bunga Putri Arindra</p>
-                            <p>4. Riza Amru Salzabila</p>
-                            <p>5. Dhiah Widyaningtyas Budi</p>
+                            <p>2. Larissa Dian &nbsp;&nbsp;&nbsp;&nbsp;Gayatri</p>
+                            <p>3. Bunga Putri &nbsp;&nbsp;&nbsp;&nbsp;Arindra</p>
+                            <p>4. Riza Amru &nbsp;&nbsp;&nbsp;&nbsp;Salzabila</p>
+                            <p>5. Dhiah &nbsp;&nbsp;&nbsp;&nbsp;Widyaningtyas &nbsp;&nbsp;&nbsp;&nbsp;Budi</p>
                             <p>6. Sigita Ardelia Fista</p>
                             <p>7. Bayu Puspita</p>
 
@@ -121,11 +121,11 @@
                         <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
                             <i class="bx bx-user-plus"></i>
                             <h4>Thanks to :</h4>
-                            <p>1. Bapak Bastinus Doddy, SKM., MM</p>
-                            <p>2. Bapak Hasan Aroni, SKM., MPH</p>
-                            <p>3. Bapak Sugeng Iwan Setyobudi, STP., M.Ke. </p>
-                            <p>4. Bapak Ibnu Fajar, SKM., M.Kes., RD </p>
-                            <p>5. Bapak Juin Hadisuyitno, SST., M.Kes </p>
+                            <p>1. Bapak Bastinus &nbsp;&nbsp;&nbsp;&nbsp;Doddy, SKM., MM</p>
+                            <p>2. Bapak Hasan &nbsp;&nbsp;&nbsp;&nbsp;Aroni, SKM., MPH</p>
+                            <p>3. Bapak Sugeng &nbsp;&nbsp;&nbsp;&nbsp;Iwan Setyobudi, &nbsp;&nbsp;&nbsp;&nbsp;STP., M.Ke. </p>
+                            <p>4. Bapak Ibnu Fajar, &nbsp;&nbsp;&nbsp;&nbsp;SKM., M.Kes., RD </p>
+                            <p>5. Bapak Juin &nbsp;&nbsp;&nbsp;&nbsp;Hadisuyitno, SST., &nbsp;&nbsp;&nbsp;&nbsp;M.Kes </p>
                         </div>
                     </div>
                 </div>

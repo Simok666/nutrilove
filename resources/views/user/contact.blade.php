@@ -47,7 +47,14 @@
             </div>
             <div class="form-group mt-3">
               <label for="name">Kategori Pertanyaan</label>
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+              {{-- <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required> --}}
+              <select class="form-select" name="subject" id="subject" aria-label="Default select example">
+                <option selected>Pilih Pertanyaan</option>
+                <option value="Remaja">Remaja</option>
+                <option value="Ibu Hamil">Ibu Hamil</option>
+                <option value="Ibu Menyusui">Ibu Menyusui</option>
+                <option value="Bayi dan Anak">Bayi dan Anak</option>
+              </select>
             </div>
             <div class="form-group mt-3">
               <label for="name">Pertanyaan</label>
@@ -83,7 +90,6 @@
             }, 400);
         },
         errorPlacement: function(error, element) {
-            console.log(element);
             error.insertAfter(element); // default
         }
     });
