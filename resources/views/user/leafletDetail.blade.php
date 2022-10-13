@@ -42,7 +42,7 @@
     </section>
     <div class="container" data-aos="fade-up">
         <div class="col-lg-12 d-flex align-items-center justify-content-center">
-            <button type="button" class="btn btn-labeled btn-info">
+            <button type="button" onclick="window.location='{{ Url("/") }}'" class="btn btn-labeled btn-info">
                 Kembali ke Home</button>
         </div>
     </div>
