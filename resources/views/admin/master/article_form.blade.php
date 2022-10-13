@@ -6,7 +6,10 @@
             }
         </style>
         <link rel="stylesheet" href="{{ asset('admin_assets/plugins/select/select2.min.css') }}">
-        <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
+        {{-- <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script> --}}
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
+        <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     </x-slot>
 
     <x-slot name="buttons">
@@ -84,16 +87,23 @@
 
     <x-slot name="scripts">
         <script src="{{ url("/admin_assets/plugins/select/select2.full.min.js") }}"></script>
+        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
         <script>
-            CKEDITOR.replace('editor1', {
-                fullPage: true,
-                extraPlugins: 'docprops',
-                // Disable content filtering because if you use full page mode, you probably
-                // want to  freely enter any HTML content in source mode without any limitations.
-                allowedContent: true,
-                height: 320,
-                removeButtons: 'PasteFromWord'
-            });
+            // CKEDITOR.replace('editor1', {
+            //     fullPage: true,
+            //     extraPlugins: 'docprops',
+            //     // Disable content filtering because if you use full page mode, you probably
+            //     // want to  freely enter any HTML content in source mode without any limitations.
+            //     allowedContent: true,
+            //     height: 320,
+            //     removeButtons: 'PasteFromWord'
+            // });
+
+            $("#editor1").summernote()
 
             var FrmEditAdmin = $("#form").validate({
                 submitHandler: function(form) {
@@ -124,7 +134,7 @@
                             if (index !== "desc_content") $("#form").find("[name=" + index + "]").val(value).trigger("change")
                         });
 
-                        CKEDITOR.instances['editor1'].setData(resp.Data[0].desc_content);
+                        // CKEDITOR.instances['editor1'].setData(resp.Data[0].desc_content);
 
                         if (!empty(resp.Data[0].file)) {
                             $("#form").find(".base64-preview").attr("src", resp.Data[0]

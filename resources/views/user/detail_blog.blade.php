@@ -24,6 +24,15 @@
                 line-clamp: 2;
                 -webkit-box-orient: vertical;
             }
+
+            .excert ol li,
+            .excert ul li {
+                list-style: inherit;
+            }
+
+            .excert img {
+                margin: 10px
+            }
         </style>
     </x-slot>
     <!--================Blog Area =================-->
@@ -44,9 +53,9 @@
                                 <li><a href="#"><i class="fa fa-user"></i> {{ $artikel->category->nama }}</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
-                            <p class="excert">
-                                <?= $artikel->desc_content ?>
-                            </p>
+                            <div class="excert">
+                                {!! $artikel->desc_content !!}
+                            </div>
                         </div>
                     </div>
                     <div class="navigation-top">
@@ -159,11 +168,11 @@
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="{{ Url("/articles/search") }}" method="GET">
+                            <form action="{{ Url('/articles/search') }}" method="GET">
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" name="search" class="form-control" placeholder='Search Keyword'
-                                            onfocus="this.placeholder = ''"
+                                        <input type="text" name="search" class="form-control"
+                                            placeholder='Search Keyword' onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'Search Keyword'">
                                         <div class="input-group-append">
                                             <button class="btns" type="submit"><i class="ti-search"></i></button>
