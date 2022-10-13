@@ -41,10 +41,6 @@
             <div class="row">
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
-                        <div class="feature-img">
-                            <img class="img-fluid"
-                                src="{{ empty($artikel->file) ? Url('no-image.png') : $artikel->file }}" alt="">
-                        </div>
                         <div class="blog_details">
                             <h2>
                                 {{ $artikel->title }}
@@ -53,6 +49,12 @@
                                 <li><a href="#"><i class="fa fa-user"></i> {{ $artikel->category->nama }}</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
+                        </div>
+                        <div class="feature-img">
+                            <img class="img-fluid"
+                                src="{{ empty($artikel->file) ? Url('no-image.png') : $artikel->file }}" width="750" height="375" alt="">
+                        </div>
+                        <div class="blog_details">
                             <div class="excert">
                                 {!! $artikel->desc_content !!}
                             </div>
@@ -221,7 +223,7 @@
         </div>
         <div class="container" data-aos="fade-up">
             <div class="col-lg-12 d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-labeled btn-info">
+                <button type="button" onclick="window.location='{{ Url("/") }}'" class="btn btn-labeled btn-info">
                     Kembali ke Home </button>
             </div>
         </div>

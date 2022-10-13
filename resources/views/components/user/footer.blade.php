@@ -14,7 +14,7 @@
           Klojen, Malang City, <br>
           East Java 65119 <br><br>
           <strong>No. Telp:</strong> +62-341-566075<br>
-          <strong>Email:</strong> direktorat@poltekkes-malang.ac.id<br>
+          <strong>Email:</strong> nutrilove851@gmail.com<br>
         </p>
       </div>
 
