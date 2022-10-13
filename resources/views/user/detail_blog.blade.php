@@ -24,6 +24,15 @@
                 line-clamp: 2;
                 -webkit-box-orient: vertical;
             }
+
+            .excert ol li,
+            .excert ul li {
+                list-style: inherit;
+            }
+
+            .excert img {
+                margin: 10px
+            }
         </style>
     </x-slot>
     <!--================Blog Area =================-->
@@ -44,9 +53,9 @@
                                 <li><a href="#"><i class="fa fa-user"></i> {{ $artikel->category->nama }}</a></li>
                                 <li><a href="#"><i class="fa fa-comments"></i> 03 Comments</a></li>
                             </ul>
-                            <p class="excert">
-                                <?= $artikel->desc_content ?>
-                            </p>
+                            <div class="excert">
+                                {!! $artikel->desc_content !!}
+                            </div>
                         </div>
                     </div>
                     <div class="navigation-top">
