@@ -44,7 +44,10 @@
                                     <a class="d-inline-block" href="{{ Url('articles/show/' . $item->kode) }}">
                                         <h2>{{ $item->title }}</h2>
                                     </a>
-                                    <p class="descritption_content"><?= strip_tags($item->desc_content) ?></p>
+                                    <p style="margin-bottom: 0" class="descritption_content"><?= strip_tags($item->desc_content) ?></p>
+                                    <a style="margin-bottom: 10px" class=" rounded-0 primary-bg " href="{{ Url('articles/show/' . $item->kode) }}">
+                                        <p style="color:#4b888b">Read More</p>
+                                    </a>
                                     <ul class="blog-info-link">
                                         <li>By :<a href="{{ Url('articles/author/' . $item->user->id) }}"><i
                                                     class="fa fa-user"></i> {{ $item->user->name }}</a>

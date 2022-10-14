@@ -6,7 +6,9 @@
             }
         </style>
         <link rel="stylesheet" href="{{ asset('admin_assets/plugins/select/select2.min.css') }}">
-        <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script>
+        {{-- <script src="https://cdn.ckeditor.com/4.19.1/full-all/ckeditor.js"></script> --}}
+        <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+        {{-- <script src="https://cdn.ckeditor.com/4.19.1/standard-all/ckeditor.js"></script> --}}
     </x-slot>
 
     <x-slot name="buttons">
@@ -33,15 +35,13 @@
                                     <div class="col-sm-9">
                                         <input type="text" class="form-control validasi" id="kode"
                                             name="kode" required>
-                                            <input type="hidden" class="form-control validasi"
-                                            name="id">
+                                        <input type="hidden" class="form-control validasi" name="id">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-sm-3 col-form-label">Title</label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control validasi" 
-                                            name="title" required>
+                                        <input type="text" class="form-control validasi" name="title" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -83,16 +83,30 @@
     </div>
 
     <x-slot name="scripts">
-        <script src="{{ url("/admin_assets/plugins/select/select2.full.min.js") }}"></script>
+        <script src="{{ url('/admin_assets/plugins/select/select2.full.min.js') }}"></script>
         <script>
             CKEDITOR.replace('editor1', {
                 fullPage: true,
-                extraPlugins: 'docprops',
-                // Disable content filtering because if you use full page mode, you probably
-                // want to  freely enter any HTML content in source mode without any limitations.
+                toolbarGroups: [
+                    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+                    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+                    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+                    { name: 'forms', groups: [ 'forms' ] },
+                    '/',
+                    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+                    { name: 'links', groups: [ 'links' ] },
+                    { name: 'insert', groups: [ 'insert' ] },
+                    '/',
+                    { name: 'styles', groups: [ 'styles' ] },
+                    { name: 'colors', groups: [ 'colors' ] },
+                    { name: 'tools', groups: [ 'tools' ] },
+                    { name: 'others', groups: [ 'others' ] },
+                    { name: 'about', groups: [ 'about' ] }
+                ],
                 allowedContent: true,
-                height: 320,
-                removeButtons: 'PasteFromWord'
+                height: 500,
+                removeButtons:'PasteFromWord,Source,NewPage,Save,ExportPdf,Preview,Print,Templates,Scayt,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Language'
             });
 
             var FrmEditAdmin = $("#form").validate({
@@ -121,10 +135,12 @@
                     if (!empty(resp.Data)) {
                         showLoading(".card-body", false)
                         $.each(resp.Data[0], function(index, value) {
-                            if (index !== "desc_content") $("#form").find("[name=" + index + "]").val(value).trigger("change")
+                            if (index !== "desc_content") $("#form").find("[name=" + index + "]").val(value)
+                                .trigger("change")
                         });
 
-                        CKEDITOR.instances['editor1'].setData(resp.Data[0].desc_content);
+                        CKEDITOR.instances.editor1.setData(resp.Data[0].desc_content);
+
 
                         if (!empty(resp.Data[0].file)) {
                             $("#form").find(".base64-preview").attr("src", resp.Data[0]
@@ -135,7 +151,7 @@
                     } else {
                         toastrshow("warning", "Data yang anda cari tidak ditemukan", "Failed")
                         setTimeout(() => {
-                            location.href = "{{ url("admin/article") }}"
+                            location.href = "{{ url('admin/article') }}"
                         }, 2000);
                     }
                 })
@@ -196,7 +212,7 @@
                 FR.readAsDataURL(this.files[0]);
             });
 
-            $(document).ready(function () {
+            $(document).ready(function() {
                 let id = "{{ $id_update }}"
                 $(".select2").select2();
                 if (!empty(id)) {
@@ -207,17 +223,17 @@
             });
 
             const getSelectCategoryArticle = (selected) => {
-                ajaxData("{{ url("/admin/article/kategori") }}" , {
-                    is_select : true
-                }, function (resp) {
+                ajaxData("{{ url('/admin/article/kategori') }}", {
+                    is_select: true
+                }, function(resp) {
                     if (empty(resp.IsError)) {
-                        $(".id_category").html(resp.data)                        
+                        $(".id_category").html(resp.data)
                     }
                     if (!empty(selected)) {
                         $(".id_category").val(selected).trigger("change")
                     }
                 })
-            } 
+            }
 
             // $(".id_category").change(function () { 
             //     $("[name=id_category]").val($(this).val())
