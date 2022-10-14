@@ -139,7 +139,11 @@
                                 .trigger("change")
                         });
 
-                        CKEDITOR.instances.editor1.setData(resp.Data[0].desc_content);
+                        setTimeout(() => {
+                            CKEDITOR.instances["editor1"].setData(resp.Data[0].desc_content);
+
+                        }, 2000);
+
 
 
                         if (!empty(resp.Data[0].file)) {
